@@ -65,4 +65,5 @@ export const handler = NextAuth({
     signIn: "/login",
   },
 });
+
 export { handler as GET, handler as POST };
