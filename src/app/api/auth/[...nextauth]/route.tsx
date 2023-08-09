@@ -1,15 +1,32 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google"
-
 import bcrypt from "bcryptjs";
 import { PrismaClient } from "@prisma/client";
 
-export const handler = NextAuth ({
+export const handler = NextAuth({
   // adapter: PrismaAdapter(prisma),
   providers: [
     process.env.VERCEL_ENV === "preview"
-      ? 
+    ? CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: {
+          label: "Username",
+          type: "text",
+          placeholder: "jsmith",
+        },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize() {
+        return {
+          id: "1",
+          name: "J Smith",
+          email: "jsmith@example.com",
+          image: "https://i.pravatar.cc/150?u=jsmith@example.com",
+        }
+      },
+    })
+  :
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
@@ -51,10 +68,8 @@ export const handler = NextAuth ({
           else throw new Error("Invalid Credentials");
         } else throw new Error("Invalid Credentials");
       },
-    }) : GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    })],
+    }),
+  ],
   callbacks: {
     jwt({ account, token, user, profile, session }) {
       if (user) token.user = user;
@@ -71,6 +86,5 @@ export const handler = NextAuth ({
     signIn: "/login",
   },
 });
-
 
 export { handler as GET, handler as POST };
