@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { PrismaClient } from "@prisma/client";
 
-export const handler = NextAuth({
+const handler = NextAuth({
   // adapter: PrismaAdapter(prisma),
   providers: [
     process.env.VERCEL_ENV === "preview"
