@@ -13,11 +13,13 @@ export async function GET() {
 }
 
 export async function POST(req: NextResponse, res: NextRequest) {
-  try {    
+  try {
     const requestBody = await req.json();
-    const result = await prisma.product.create({data: requestBody});
-    return NextResponse.json({ data: result }, {status: 201});
+    const result = await prisma.user.create({ data: requestBody });
+    return NextResponse.json({ data: requestBody }, { status: 201 });
   } catch (error) {
-      return NextResponse.json({data: error}, {status: 500})
+    if (error instanceof Error)
+      return NextResponse.json({ data: error.message }, { status: 500 })
+    return NextResponse.json({ data: error }, { status: 500 })
   }
 };
