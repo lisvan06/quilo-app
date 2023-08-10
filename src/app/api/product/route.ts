@@ -12,7 +12,7 @@ export async function GET() {
   }
 }
 
-export async function POST(req: NextResponse, res: NextRequest) {
+export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const requestBody = await req.json();
     const result = await prisma.user.create({ data: requestBody });
