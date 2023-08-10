@@ -1,7 +1,5 @@
 export default function FooterBar() {
   return (
-    <div >
-              
-    </div>
+    <footer className="... sticky bottom-0">...</footer>
   );
 }

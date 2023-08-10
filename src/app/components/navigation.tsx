@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -12,18 +13,22 @@ function classNames(...classes: any) {
 
 export default function NavigationBar() {
   const { data: session, status } = useSession();
+  const pathname = usePathname();
 
   let authenticated = status === "authenticated" ? true : false;
 
+  // let current = (router.pathname == "/" ? true : false);
+
   const navigation = [
     // Not Authenticated
-    { name: "Home", id:"navhome", href: "/", current: true, authenticated: false },
-    { name: "About", id:"navnavabout", href: "/about", current: false, authenticated: false },
-    { name: "Help", id:"navhelp", href: "/help", current: false, authenticated: false },
-    { name: "Dashboard", id:"navdb", href: "/dashboard", current: false, authenticated: true },
-    { name: "Settings", id:"navsettings", href: "/dashboard/profile", current: false, authenticated: true },
-    { name: "Products", id:"navproducts", href: "/dashboard/product", current: false, authenticated: true },
-    { name: "Enterprise", id:"naventerprise", href: "/dashboard/enterprise", current: false, authenticated: true }
+    { name: "Home", id:"navhome", href: "/", current: pathname == "/" ? true : false, authenticated: false },
+    { name: "About", id:"navabout", href: "/about", current: pathname == '/about' ? true : false, authenticated: false },
+    { name: "Contact", id:"navcontact", href: "/contact", current: pathname == '/contact' ? true : false, authenticated: false },
+    { name: "Help", id:"navhelp", href: "/help", current: pathname == '/help' ? true : false, authenticated: false },
+    { name: "Dashboard", id:"navdb", href: "/dashboard", current: pathname == '/dashboard' ? true : false, authenticated: true },
+    { name: "Settings", id:"navsettings", href: "/dashboard/profile", current: pathname == '/dashboard/profile' ? true : false, authenticated: true },
+    { name: "Products", id:"navproducts", href: "/dashboard/product", current: pathname == '/dashboard/products' ? true : false, authenticated: true },
+    { name: "Enterprise", id:"naventerprise", href: "/dashboard/enterprise", current: pathname == '/dashboard/enterprise' ? true : false, authenticated: true }
   ];
 
   return (
@@ -45,13 +50,7 @@ export default function NavigationBar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
+                
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) =>
