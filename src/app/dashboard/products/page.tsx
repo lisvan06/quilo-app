@@ -1,3 +1,5 @@
+"use client"
+
 const products = [
   {
     id: 1,
