@@ -22,13 +22,12 @@ export default function NavigationBar() {
   const navigation = [
     // Not Authenticated
     { name: "Home", id:"navhome", href: "/", current: pathname == "/" ? true : false, authenticated: false },
+    { name: "Dashboard", id:"navdb", href: "/dashboard", current: pathname == '/dashboard' ? true : false, authenticated: true },
+    { name: "Profile", id:"navprofile", href: "/dashboard/profile", current: pathname == '/dashboard/profile' ? true : false, authenticated: true },
+    { name: "Products", id:"navproducts", href: "/dashboard/products", current: pathname == '/dashboard/products' ? true : false, authenticated: true },
     { name: "About", id:"navabout", href: "/about", current: pathname == '/about' ? true : false, authenticated: false },
     { name: "Contact", id:"navcontact", href: "/contact", current: pathname == '/contact' ? true : false, authenticated: false },
-    { name: "Help", id:"navhelp", href: "/help", current: pathname == '/help' ? true : false, authenticated: false },
-    { name: "Dashboard", id:"navdb", href: "/dashboard", current: pathname == '/dashboard' ? true : false, authenticated: true },
-    { name: "Settings", id:"navsettings", href: "/dashboard/profile", current: pathname == '/dashboard/profile' ? true : false, authenticated: true },
-    { name: "Products", id:"navproducts", href: "/dashboard/product", current: pathname == '/dashboard/products' ? true : false, authenticated: true },
-    { name: "Enterprise", id:"naventerprise", href: "/dashboard/enterprise", current: pathname == '/dashboard/enterprise' ? true : false, authenticated: true }
+    { name: "Help", id:"navhelp", href: "/help", current: pathname == '/help' ? true : false, authenticated: false }    
   ];
 
   return (
@@ -69,7 +68,22 @@ export default function NavigationBar() {
                         >
                           {item.name}
                         </a>
-                      ) : null
+                      ) : (
+                        <a
+                          id={item.id}
+                          key={item.name}
+                          href={item.href}
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium"
+                          )}
+                          aria-current={item.current ? "page" : undefined}
+                        >
+                          {item.name}
+                        </a>
+                      )
                     )}
                   </div>
                 </div>
@@ -97,19 +111,12 @@ export default function NavigationBar() {
                   </>
                 ) : (
                   <>
-                    <button type="button"
-                      className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
                     <Menu as="div" className="relative ml-3">
-                      <div>
+                      <div>                      
                         <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
+                          <span className="text-xs m-2">{session?.user?.email}</span>
                           <img
                             className="h-8 w-8 rounded-full"
                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -127,7 +134,7 @@ export default function NavigationBar() {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
+                        <Menu.Item>
                             {({ active }) => (
                               <a
                                 href="/dashboard/profile"
@@ -136,20 +143,20 @@ export default function NavigationBar() {
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
-                                My Profile
+                                Profile
                               </a>
                             )}
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="/dasboard/profile/settings"
+                                href="/dashboard"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
-                                Settings
+                                Dashboard
                               </a>
                             )}
                           </Menu.Item>
@@ -163,6 +170,32 @@ export default function NavigationBar() {
                                 )}
                               >
                                 Products
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="/dashboard/users"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Users
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="/dashboard/categories"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Categories
                               </a>
                             )}
                           </Menu.Item>
@@ -191,6 +224,7 @@ export default function NavigationBar() {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
+                !item.authenticated  ? (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
@@ -205,8 +239,9 @@ export default function NavigationBar() {
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </Disclosure.Button>
-              ))}
+                </Disclosure.Button>):null
+                ))
+              }
             </div>
           </Disclosure.Panel>
         </>
