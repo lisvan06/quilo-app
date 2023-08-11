@@ -15,7 +15,7 @@ export default function NavigationBar() {
   const { data: session, status } = useSession();
   const pathname = usePathname();
 
-  let authenticated = status === "authenticated" ? true : false;
+  let auth = status === "authenticated" ? true : false;
 
   // let current = (router.pathname == "/" ? true : false);
 
@@ -52,8 +52,8 @@ export default function NavigationBar() {
                 
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) =>
-                      !item.authenticated ? (
+                    {navigation.map((item) =>                    
+                      auth ? (
                         <a
                           id={item.id}
                           key={item.name}
@@ -69,7 +69,7 @@ export default function NavigationBar() {
                           {item.name}
                         </a>
                       ) : (
-                        <a
+                        !item.authenticated ? (<a
                           id={item.id}
                           key={item.name}
                           href={item.href}
@@ -82,7 +82,7 @@ export default function NavigationBar() {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                        </a>
+                        </a>) : null                        
                       )
                     )}
                   </div>
