@@ -1,9 +1,10 @@
 "use client";
 
-import { Fragment, useRef, useState } from "react";
+import { Fragment, FormEvent, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const products = [
   {
@@ -130,13 +131,17 @@ const products = [
 ];
 
 export default function ProductsPage() {
+  const { data: session, status } = useSession();
+
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
 
-  function handleModalClick() {
-    console.log("Hello");
+  const handleModalClick = async (event: FormEvent<HTMLFormElement>) => {
+    console.log("HandleModalClick");
+
+    console.log(session?.user?.id as string);
     setOpen(false);
-  }
+  };
 
   return (
     <>
@@ -182,19 +187,14 @@ export default function ProductsPage() {
                         </Dialog.Title>
                         <div className="mt-2">
                           <div className="">
-                            <form>
+                            <form id="createProductForm">
                               <div data-te-input-wrapper-init>
-                                <input
-                                  type="text"
-                                  name="title"
-                                  className="relative m-2 border-zinc-600 text-black hidden"
-                                  placeholder="ownerId"
-                                />
                                 <input
                                   type="text"
                                   name="title"
                                   className=" flexrelative m-2 border-2 border-zinc-200 text-black"
                                   placeholder="Title"
+                                  required
                                 />
                                 <input
                                   type="text"
@@ -215,28 +215,28 @@ export default function ProductsPage() {
                                   placeholder="Price"
                                 />
                               </div>
+                              <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                <button
+                                  type="button"
+                                  className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+                                  onClick={handleModalClick}
+                                >
+                                  Create
+                                </button>
+                                <button
+                                  type="button"
+                                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                                  onClick={() => setOpen(false)}
+                                  ref={cancelButtonRef}
+                                >
+                                  Cancel
+                                </button>
+                              </div>
                             </form>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
-                      onClick={handleModalClick}
-                    >
-                      Create
-                    </button>
-                    <button
-                      type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                      onClick={() => setOpen(false)}
-                      ref={cancelButtonRef}
-                    >
-                      Cancel
-                    </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -259,6 +259,14 @@ export default function ProductsPage() {
               >
                 + Add
               </button>
+            </div>
+            <div className="lg:ml-40 ml-10 space-x-8">
+              <Link
+                href="/dashboard/products/add"
+                className="bg-indigo-600 px-4 py-2 rounded-full text-white font-semibold tracking-wide cursor-pointer"
+              >
+                + Add Product
+              </Link>
             </div>
           </div>
         </div>
