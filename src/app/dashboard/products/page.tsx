@@ -136,12 +136,12 @@ export default function ProductsPage() {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
 
-  const handleModalClick = async (event: FormEvent<HTMLFormElement>) => {
-    console.log("HandleModalClick");
+  // const handleModalClick = async (event: FormEvent<HTMLFormElement>) => {
+  //   console.log("HandleModalClick");
 
-    console.log(session?.user?.id as string);
-    setOpen(false);
-  };
+  //   console.log(session?.user?.id as string);
+  //   setOpen(false);
+  // };
 
   return (
     <>
@@ -219,7 +219,7 @@ export default function ProductsPage() {
                                 <button
                                   type="button"
                                   className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
-                                  onClick={handleModalClick}
+                                  onClick={() => setOpen(false)}
                                 >
                                   Create
                                 </button>
