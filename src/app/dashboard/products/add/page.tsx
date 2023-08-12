@@ -13,8 +13,9 @@ export default function AddProductsPage() {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
-    data.ownerId = session?.user?.id;
+    const data = Object.fromEntries(formData);    
+    
+    data.ownerId = session?.user?.id as string;
 
     console.log(data);
 
