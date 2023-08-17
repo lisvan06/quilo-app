@@ -13,21 +13,79 @@ function classNames(...classes: any) {
 
 export default function NavigationBar() {
   const { data: session, status } = useSession();
-  const pathname = usePathname();
 
+  const pathname = usePathname();
   let auth = status === "authenticated" ? true : false;
 
-  // let current = (router.pathname == "/" ? true : false);
+  const userMenu = [    
+    {
+      name: "Dashboard",
+      href: "/dashboard",
+    },{
+      name: "Profile",
+      href: "/dashboard/profile",
+    },
+    {
+      name: "Products",
+      href: "/dashboard/products",
+    },
+    {
+      name: "Logout",
+      href: "/api/auth/signout",
+    }
+  ];
 
   const navigation = [
     // Not Authenticated
-    { name: "Home", id:"navhome", href: "/", current: pathname == "/" ? true : false, authenticated: false },
-    { name: "Dashboard", id:"navdb", href: "/dashboard", current: pathname == '/dashboard' ? true : false, authenticated: true },
-    { name: "Profile", id:"navprofile", href: "/dashboard/profile", current: pathname == '/dashboard/profile' ? true : false, authenticated: true },
-    { name: "Products", id:"navproducts", href: "/dashboard/products", current: pathname == '/dashboard/products' ? true : false, authenticated: true },
-    { name: "About", id:"navabout", href: "/about", current: pathname == '/about' ? true : false, authenticated: false },
-    { name: "Contact", id:"navcontact", href: "/contact", current: pathname == '/contact' ? true : false, authenticated: false },
-    { name: "Help", id:"navhelp", href: "/help", current: pathname == '/help' ? true : false, authenticated: false }    
+    {
+      name: "Home",
+      id: "navhome",
+      href: "/",
+      current: pathname == "/" ? true : false,
+      authenticated: false,
+    },
+    {
+      name: "Dashboard",
+      id: "navdb",
+      href: "/dashboard",
+      current: pathname == "/dashboard" ? true : false,
+      authenticated: true,
+    },
+    {
+      name: "Profile",
+      id: "navprofile",
+      href: "/dashboard/profile",
+      current: pathname == "/dashboard/profile" ? true : false,
+      authenticated: true,
+    },
+    {
+      name: "Products",
+      id: "navproducts",
+      href: "/dashboard/products",
+      current: pathname == "/dashboard/products" ? true : false,
+      authenticated: true,
+    },
+    // {
+    //   name: "About",
+    //   id: "navabout",
+    //   href: "/about",
+    //   current: pathname == "/about" ? true : false,
+    //   authenticated: false,
+    // },
+    // {
+    //   name: "Contact",
+    //   id: "navcontact",
+    //   href: "/contact",
+    //   current: pathname == "/contact" ? true : false,
+    //   authenticated: false,
+    // },
+    // {
+    //   name: "Help",
+    //   id: "navhelp",
+    //   href: "/help",
+    //   current: pathname == "/help" ? true : false,
+    //   authenticated: false,
+    // },
   ];
 
   return (
@@ -38,7 +96,10 @@ export default function NavigationBar() {
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button id="db123" className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button
+                  id="db123"
+                  className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                >
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -49,11 +110,10 @@ export default function NavigationBar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) =>                    
-                      auth ? (
+                    {navigation.map((item) =>
+                      auth && item.authenticated ? (
                         <a
                           id={item.id}
                           key={item.name}
@@ -68,8 +128,8 @@ export default function NavigationBar() {
                         >
                           {item.name}
                         </a>
-                      ) : (
-                        !item.authenticated ? (<a
+                      ) : !item.authenticated ? (
+                        <a
                           id={item.id}
                           key={item.name}
                           href={item.href}
@@ -82,8 +142,8 @@ export default function NavigationBar() {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                        </a>) : null                        
-                      )
+                        </a>
+                      ) : null
                     )}
                   </div>
                 </div>
@@ -112,11 +172,13 @@ export default function NavigationBar() {
                 ) : (
                   <>
                     <Menu as="div" className="relative ml-3">
-                      <div>                      
-                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <div>
+                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2  focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
-                          <span className="text-xs m-2">{session?.user?.email}</span>
+                          <span className="text-xs m-2">
+                            {session?.user?.email}
+                          </span>
                           <img
                             className="h-8 w-8 rounded-full"
                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -133,85 +195,24 @@ export default function NavigationBar() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700">
+                        {userMenu.map((item)=> 
+                            (
+                              <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="/dashboard/profile"
+                                href={item.href}
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  active ? "" : "",
+                                  "block px-4 py-2 text-sm text-gray-700 dark:text-white dark:hover:bg-gray-900"
                                 )}
                               >
-                                Profile
+                                {item.name}
                               </a>
-                            )}
+                            )}                         
                           </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="/dashboard"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
-                                Dashboard
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="/dashboard/products"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
-                                Products
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="/dashboard/users"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
-                                Users
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="/dashboard/categories"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
-                                Categories
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="/api/auth/signout"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
-                                Sign out
-                              </a>
-                            )}
-                          </Menu.Item>
+                            )
+                        )}
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -223,25 +224,41 @@ export default function NavigationBar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                !item.authenticated  ? (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  id={item.id}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>):null
-                ))
-              }
+              {navigation.map((item) =>
+                auth ? (
+                  <Disclosure.Button
+                    key={item.name}
+                    as="a"
+                    id={item.id}
+                    href={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block rounded-md px-3 py-2 text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
+                  </Disclosure.Button>
+                ) : !item.authenticated ? (
+                  <Disclosure.Button
+                    key={item.name}
+                    as="a"
+                    id={item.id}
+                    href={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block rounded-md px-3 py-2 text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
+                  </Disclosure.Button>
+                ) : null
+              )}
             </div>
           </Disclosure.Panel>
         </>

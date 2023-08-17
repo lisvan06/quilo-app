@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import ProductForm from "@/app/components/forms/productForm";
 
 export default function AddProductsPage() {
   const { data: session, status } = useSession();
@@ -42,45 +43,7 @@ export default function AddProductsPage() {
       <h1 className="text-4xl font-bold mb-2">Add Product</h1>
 
       <hr className="mb-4" />
-      <form id="myAddFormProduct" method="post" onSubmit={handleClick}>
-        <input
-          type="text"
-          name="ownerId"
-          placeholder="Some Title"
-          className="bg-zinc-800 px-4 py-2 mb-2 text-white hidden"
-        />
-        <input
-          type="text"
-          name="title"
-          placeholder="Some Title"
-          className="bg-zinc-800 px-4 py-2 block mb-2 text-white"
-          required
-        />
-        <input
-          type="textarea"
-          name="description"
-          placeholder="Some Description"
-          className="bg-zinc-800 px-4 py-2 block mb-2 text-white"
-          required
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          className="bg-zinc-800 px-4 py-2 block mb-2 text-white"
-          required
-        />
-        <input
-          type="number"
-          name="stock"
-          placeholder="Stock"
-          className="bg-zinc-800 px-4 py-2 block mb-2 text-white"
-          required
-        />
-        <button className="bg-indigo-500 px-4 py-2 rounded-md text-white hover:bg-indigo-600 transition-colors mb-2">
-          Add Product
-        </button>
-      </form>
+      <ProductForm></ProductForm>
     </div>
   );
 }

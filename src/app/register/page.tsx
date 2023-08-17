@@ -3,7 +3,7 @@
 import axios, { AxiosError } from "axios";
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [error, setError] = useState();
@@ -13,25 +13,27 @@ export default function RegisterPage() {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
+    const username = data.get("username");
     const email = data.get("email");
     const password = data.get("password");
 
     try {
       const signUpResponse = await axios.post("/api/auth/signup", {
+        username,
         email,
         password,
       });
 
-      if (signUpResponse.status === 200) {
-        const res = await signIn("credentials", {
+      if (signUpResponse.status === 200) { //If user has been registered correctly
+        const res = await signIn("credentials", { //Sign in the user
           email: email,
           password: password as string,
           redirect: false,
         });
 
-        if (res?.ok) {
-          router.push("/dashboard/profile");
-          router.refresh();
+        if (res?.ok) { //If sign in was successful
+          // redirect("/dashboard/profile");
+          return router.push('/dashboard/profile');
         }
       }
     } catch (error) {
@@ -53,21 +55,30 @@ export default function RegisterPage() {
         </a>
       </p>
       <hr className="mb-4" />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="rounded-md p-4 bg-gray-900">
+        <input
+          type="text"
+          name="username"
+          placeholder="john"
+          className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
+          required
+        />
         <input
           type="email"
           name="email"
           placeholder="johndoe@gmail.com"
-          className="bg-zinc-800 px-4 py-2 block mb-2 text-black"
+          className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
+          required
         />
         <input
           type="password"
           name="password"
           minLength={6}
           placeholder="*****"
-          className="bg-zinc-800 px-4 py-2 block mb-2 text-black"
+          className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
+          required
         />
-        <button className="bg-indigo-500 px-4 py-2 rounded-md text-white hover:bg-indigo-600 transition-colors mb-2">
+        <button className="float-right bg-indigo-500 px-6 py-2 mt-2 rounded-md text-white hover:bg-indigo-600 transition-colors">
           Register
         </button>
       </form>

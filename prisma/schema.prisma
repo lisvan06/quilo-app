@@ -16,12 +16,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String  @map("provider_account_id")
-  refresh_token     String? 
-  access_token      String? 
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? 
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -31,7 +31,7 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())  @map("_id") @db.ObjectId
+  id           String   @id @default(cuid()) @map("_id") @db.ObjectId
   sessionToken String   @unique @map("session_token")
   userId       String   @map("user_id") @db.ObjectId
   expires      DateTime
@@ -42,7 +42,7 @@ model Session {
 
 model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
+  username      String   @unique
   email         String?   @unique
   password      String
   emailVerified DateTime? @map("email_verified")
@@ -50,7 +50,7 @@ model User {
   enterprise    String?
   role          String    @default("USER")
   products      Product[]
-  address       Address?
+  address       String?
   accounts      Account[]
   sessions      Session[]
 
@@ -58,7 +58,7 @@ model User {
 }
 
 model VerificationToken {
-  identifier String @id @map("_id")
+  identifier String   @id @map("_id")
   token      String   @unique
   expires    DateTime
 
@@ -91,9 +91,9 @@ enum Role {
   ADMIN
 }
 
-type Address {
-  street String
-  city   String
-  state  String
-  zip    String
-}
+// type Address {
+//   street String
+//   city   String
+//   state  String
+//   zip    String
+// }

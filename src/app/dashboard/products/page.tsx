@@ -2,9 +2,8 @@
 
 import { Fragment, FormEvent, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import axios from "axios";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
+import ProductForm from "@/app/components/forms/productForm";
 
 const products = [
   {
@@ -145,7 +144,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <Transition.Root show={open} as={Fragment}>
+      {/* <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-10"
@@ -243,40 +242,22 @@ export default function ProductsPage() {
             </div>
           </div>
         </Dialog>
-      </Transition.Root>
+      </Transition.Root> */}
 
-      <div className="bg-white p-8 w-full">
-        <div className=" flex items-center justify-between pb-6">
-          <div>
-            <h2 className="text-gray-600 font-semibold">Products Order</h2>
-            <span className="text-xs">All products item</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="lg:ml-40 ml-10 space-x-8">
-              <button
-                onClick={() => setOpen(true)}
-                className="bg-indigo-600 px-4 py-2 rounded-full text-white font-semibold tracking-wide cursor-pointer"
-              >
-                + Add
-              </button>
-            </div>
-            <div className="lg:ml-40 ml-10 space-x-8">
-              <Link
-                href="/dashboard/products/add"
-                className="bg-indigo-600 px-4 py-2 rounded-full text-white font-semibold tracking-wide cursor-pointer"
-              >
-                + Add Product
-              </Link>
-            </div>
-          </div>
+      <div className="bg-white p-8 w-full dark:bg-gray-900 ">
+        <div className=" flex items-center justify-between pb-2">
+          <div className="w-full justify-center items-center v-screen float-right">
+            <ProductForm></ProductForm>
+          </div>          
         </div>
         <div>
-          <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+          
+          <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto ">
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-              <table className="min-w-full leading-normal">
+              <table className="min-w-full leading-normal ">
                 <thead>
                   <tr>
-                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider ">
                       Owner
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">

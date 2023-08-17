@@ -1,12 +1,11 @@
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/app/lib/prisma/_base";
 
 export async function GET() {
   try {
     const data = await prisma.user.findMany();
+    console.log("Im Here");
     return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
@@ -14,7 +13,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { email, password } = await request.json();
+  const { username, email, password } = await request.json();
 
   if (!email || !email.includes("@"))
     return NextResponse.json({ message: "Invalid email" }, { status: 400 });
@@ -36,7 +35,7 @@ export async function POST(request: Request) {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await prisma.user.create({
-      data: { email, password: hashedPassword },
+      data: { username, email, password: hashedPassword },
     });
 
     return NextResponse.json({ message: user }, { status: 200 });
