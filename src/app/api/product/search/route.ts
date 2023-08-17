@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
   
 }
 
-export async function searchByKey(key: string, value: any) {
+async function searchByKey(key: string, value: any) {
   var val = value;
   if (key == "stock" || key == "price") val = Number(value);
   const user = await prisma.product.findMany({

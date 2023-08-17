@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
   if (phone) return await searchByKey("phone", phone);
 }
 
-export async function searchByKey(key: string, value: string) {
+async function searchByKey(key: string, value: string) {
   const user = await prisma.user.findMany({
     where: {
       [key as string]: value,
