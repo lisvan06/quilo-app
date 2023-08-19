@@ -5,7 +5,7 @@ const getData = async () => {
   try {
     // const us = new productService();
     // const res = us.findAll();
-    const response = await fetch("http://localhost:3000/api/product", {
+    const response = await fetch("/api/product", {
       cache: "no-store",
     });
     const res = await response.json();
