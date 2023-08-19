@@ -2,16 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-// interface Product {
-//   id: string;
-//   title: string;
-//   description: string;
-//   stock: number;
-//   price: number;
-//   published: boolean;
-//   ownerId: string;
-// }
-
 const AddProductForm = ({ formValues, onSubmitForm }) => {
   const router = useRouter();
 
@@ -30,7 +20,7 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
   }, [formValues]);
 
   const btnBack = () => {
-    router.push("/dashboard/products");
+    router.back();
   };
 
   const handleSubmit = (e) => {

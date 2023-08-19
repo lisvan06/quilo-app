@@ -20,7 +20,8 @@ const BtnDelete = ({ id }) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await fetch(`/api/product/${id}`, {
+        const address_url = window.location.origin;
+        const response = await fetch(`${address_url}/api/product/${id}`, {
           method: "DELETE",
         });
         if (response.ok) {

@@ -11,7 +11,7 @@ export default class productService {
       console.log("Here in service");
       const res = await axios.get(process.env.BASE_URL+"/api/product");
       //console.log("Esta data", res.data);
-      return NextResponse.json({res},{status: 200});
+      return NextResponse.json(res.data,{status: 200});
     } catch (error) {
       return false;
     }

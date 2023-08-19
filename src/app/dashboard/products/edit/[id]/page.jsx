@@ -1,22 +1,24 @@
 "use client";
-import AddProductForm from "../../../../components/forms/addProductForm";
-import { useRouter } from "next/navigation";
-const uri = "http://localhost:3000/api/product";
 
-const getDataById = async (id) => {
-  try {
-    const response = await fetch(`/api/product/${id}`, { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error("Failed to update.");
-    }
-    return response.json();
-  } catch (error) {
-    console.log("Error : ", error);
-  }
-};
+import AddProductForm from "@/app/components/forms/addProductForm";
+import { useRouter } from "next/navigation";
 
 const Edit = async ({ params }) => {
   const router = useRouter();
+  const getDataById = async (id) => {
+    try {
+      const address_url = window.location.origin;
+      console.log(window.location.origin);
+      const response = await fetch(`${address_url}/api/product/${id}`, {
+        cache: "no-store",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to update.");
+      } else return response.json();
+    } catch (error) {
+      console.log("Error : ", error);
+    }
+  };
 
   const id = params.id;
   const { data } = await getDataById(id);
@@ -25,7 +27,7 @@ const Edit = async ({ params }) => {
 
   const onSubmitEdit = async (formData) => {
     try {
-      const response = await fetch(`${uri}/${id}`, {
+      const response = await fetch(`http://localhost:3000/api/product/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -46,11 +48,11 @@ const Edit = async ({ params }) => {
   return (
     <>
       <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col ">
-      <div className="justify-center text-center">
-        <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
-          Edit Product
-        </h1>
-      </div>
+        <div className="justify-center text-center">
+          <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
+            Edit Product
+          </h1>
+        </div>
         <AddProductForm onSubmitForm={onSubmitEdit} formValues={data} />
       </div>
     </>

@@ -1,23 +1,27 @@
 import Link from "next/link";
 import BtnDelete from "./btnDeleteProduct";
+import productService from "@/app/api/product/service";
 
 const getData = async () => {
-  try {
-    // const us = new productService();
-    // const res = us.findAll();
-    const response = await fetch("/api/product", {
-      cache: "no-store",
-    });
-    const res = await response.json();
-    return res;
-  } catch (error) {
-    console.log("Error : ", error);
+  var url = "";
+  if (typeof window !== "undefined") {
+    url = window.location.origin;
+  } else {
+    url = process.env.NEXTAUTH_URL;
+  }
+
+  if (url != "") {
+    try {
+      const response = await fetch(`${url}/api/product`, {
+        cache: "no-store",
+      });
+      const res = await response.json();
+      return res;
+    } catch (error) {
+      console.log("Error : ", error);
+    }
   }
 };
-
-//Para ver todos los documentos que estan en ATLAS en la consola de VSC
-// const {data} = await getData();
-// console.log(data);
 
 const ShowProduct = async () => {
   const data = await getData();
@@ -46,9 +50,7 @@ const ShowProduct = async () => {
             </p>
           </td>
           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-            <p className="text-gray-900 whitespace-no-wrap">
-              $ {element.price}
-            </p>
+            <p className="text-gray-900 whitespace-no-wrap">{element.price}</p>
           </td>
           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
             <p className="text-gray-900 whitespace-no-wrap">{element.stock}</p>

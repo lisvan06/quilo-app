@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation";
 export default async function productsPage() {
   const router = useRouter();
   
-  const handleAddClick = () => {
-    
+  const handleAddClick = () => {    
     router.push("/dashboard/products/add");
   };
 
