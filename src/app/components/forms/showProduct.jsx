@@ -3,13 +3,13 @@ import BtnDelete from "./btnDeleteProduct";
 
 const getData = async () => {
   var url = "";
-  // if (typeof window !== "undefined") {
-  //   url = window.location.origin;
-  // } else url = process.env.BASE_URL;
+  if (typeof window !== "undefined") {
+    url = window.location.origin;
+  } else url = process.env.BASE_URL;
 
   if (url != "") {
     try {
-      url ="https://quilo-app-lisvan06.vercel.app/";
+      // url ="https://quilo-app-lisvan06.vercel.app/";
       const response = await fetch(`${url}/api/product`, {
         cache: "no-store",
       });

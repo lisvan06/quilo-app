@@ -15,7 +15,8 @@ const AddProduct = () => {
     }
     //console.log(`Name: ${name} Age: ${age}`);
     try {
-      const response = await fetch("http://localhost:3000/api/product", {
+      const url = window.location.origin;
+      const response = await fetch("/api/product", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
