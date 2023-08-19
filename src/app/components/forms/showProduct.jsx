@@ -1,14 +1,11 @@
 import Link from "next/link";
 import BtnDelete from "./btnDeleteProduct";
-import productService from "@/app/api/product/service";
 
 const getData = async () => {
   var url = "";
   if (typeof window !== "undefined") {
-    url = window.location.origin;
-  } else {
-    url = process.env.NEXTAUTH_URL;
-  }
+    url = "https://quilo-app-lisvan06.vercel.app/";
+  } else url = "https://quilo-app-lisvan06.vercel.app/";
 
   if (url != "") {
     try {

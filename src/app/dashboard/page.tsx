@@ -2,18 +2,19 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function DashBoardPage() {
-  const {data: session, status } = useSession({
+  const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       const router = useRouter();
       router.push("/");
     },
-  })
+  });
 
   if (status === "loading") {
-    return "Loading ..."
+    return "Loading ...";
   } else {
     return (
       <>
@@ -797,6 +798,4 @@ export default function DashBoardPage() {
       </>
     );
   }
-
-  
 }
