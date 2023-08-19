@@ -3,12 +3,13 @@ import BtnDelete from "./btnDeleteProduct";
 
 const getData = async () => {
   var url = "";
-  if (typeof window !== "undefined") {
-    url = "https://quilo-app-lisvan06.vercel.app/";
-  } else url = "https://quilo-app-lisvan06.vercel.app/";
+  // if (typeof window !== "undefined") {
+  //   url = window.location.origin;
+  // } else url = process.env.BASE_URL;
 
   if (url != "") {
     try {
+      url ="https://quilo-app-lisvan06.vercel.app/";
       const response = await fetch(`${url}/api/product`, {
         cache: "no-store",
       });
@@ -22,10 +23,11 @@ const getData = async () => {
 
 const ShowProduct = async () => {
   const data = await getData();
-
-  return (
-    <>
+  if (typeof data == "object"){
+    return (
+    <>      
       {data.map((element) => (
+        
         <tr key={element.id}>
           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
             <div className="flex items-center">
@@ -99,6 +101,8 @@ const ShowProduct = async () => {
       ))}
     </>
   );
+  } else return <></>
+  
 };
 
 export default ShowProduct;
