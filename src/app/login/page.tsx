@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import bcrypt from "bcryptjs";
 
 export default function LoginPage() {
-  const [error, setError] = useState("");   
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -21,7 +21,7 @@ export default function LoginPage() {
     const res = await signIn("credentials", {
       email: email,
       password: password,
-      redirect: false
+      redirect: false,
     });
 
     if (res?.error) return setError(res.error as string);

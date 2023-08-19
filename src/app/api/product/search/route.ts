@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma/_base";
-import { listenerCount } from "process";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -24,11 +23,11 @@ export async function GET(req: NextRequest) {
 async function searchByKey(key: string, value: any) {
   var val = value;
   if (key == "stock" || key == "price") val = Number(value);
-  const user = await prisma.product.findMany({
+  const data = await prisma.product.findMany({
     where: {
       [key as string]: val,
-    },
+    }
   });
 
-  return NextResponse.json({ data: user }, { status: 200 });
+  return NextResponse.json(data, { status: 200 });
 }

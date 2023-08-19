@@ -22,15 +22,20 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const requestBody = await req.json();
-
+  
   try {
+    const price = parseFloat(requestBody.price);
+    requestBody.price = price;
+    const stock = parseInt(requestBody.stock);
+    requestBody.stock = stock;
+    
     const data = await prisma.product.update({
       where: {
         id: params.id,
       },
       data: {
         title: requestBody.title,
-        description: requestBody.title,
+        description: requestBody.description,
         stock: requestBody.stock,
         price: requestBody.price,
         published: requestBody.published,

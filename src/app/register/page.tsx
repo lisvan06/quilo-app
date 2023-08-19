@@ -33,6 +33,7 @@ export default function RegisterPage() {
 
         if (res?.ok) { //If sign in was successful
           // redirect("/dashboard/profile");
+          router.refresh();
           return router.push('/dashboard/profile');
         }
       }
