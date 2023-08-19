@@ -3,6 +3,7 @@
 import axios, { AxiosError } from "axios";
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const [error, setError] = useState();
