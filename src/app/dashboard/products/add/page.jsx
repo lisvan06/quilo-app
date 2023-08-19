@@ -1,6 +1,7 @@
 "use client";
 import AddProductForm from "../../../components/forms/addProductForm";
 import { useRouter } from "next/navigation";
+const uri ="http://localhost:3000";
 
 const AddProduct = () => {
   const router = useRouter();
@@ -15,8 +16,8 @@ const AddProduct = () => {
     }
     //console.log(`Name: ${name} Age: ${age}`);
     try {
-      const url = window.location.origin;
-      const response = await fetch("/api/product", {
+      // const url = window.location.origin;
+      const response = await fetch(uri+'/api/product', {
         method: "POST",
         headers: {
           "Content-type": "application/json",

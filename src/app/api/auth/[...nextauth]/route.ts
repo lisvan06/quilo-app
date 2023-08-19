@@ -71,16 +71,18 @@ const handler = NextAuth({
         }),
   ],
   callbacks: {
-    jwt({ token, user, trigger, session }) {
+    jwt({ token, user, trigger, session }) {      
+      if (trigger === "update") {
+        token.user = session.user;
+        return { ...token, ...user };
+      }
       if (user) {
         token.user = user;
       }
-      return token;
+      return { ...token, ...user };
     },
 
-    session({ session, user, token }) {
-      // console.log(token);
-      // console.log(session);
+    session({ session, token, user, trigger }) {      
       session.user = token.user as any;
       return session;
     },

@@ -1,13 +1,13 @@
-"use client"
-
 import ShowProduct from "@/app/components/forms/showProduct";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/dist/server/api-utils";
+// import { useRouter } from "next/navigation";
 
 export default async function productsPage() {
-  const router = useRouter();
+  // const router = useRouter();
   
   const handleAddClick = () => {    
-    router.push("/dashboard/products/add");
+    redirect("/dashboard/products/add");
+    // router.push("/dashboard/products/add");
   };
 
   return (

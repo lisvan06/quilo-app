@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma/_base";
+import { getServerSession } from "next-auth";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  // const session = req;
+  // console.log(JSON.stringify(session));
   try {
     const data = await prisma.product.findMany({});
     return NextResponse.json(data, { status: 200 });

@@ -1,21 +1,35 @@
 import { FormEvent, useState } from "react";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
 import UserService from "@/app/api/user/service";
+import { useRouter } from "next/navigation";
 
 export default function ProfileForm() {
   const { data: session, status, update } = useSession();
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
+  const router = useRouter();
+
+  async function updateSession(user) {    
+    await update({
+      ...session,
+      user: {
+        ...session?.user,
+        enterprise: user.enterprise,
+        address: user.address,
+      }
+    });
+  }
+
   if (status == "authenticated") {
-    const handleClick = async (e: FormEvent<HTMLFormElement>) => {
+    const handleClick = async (e) => {
       e.preventDefault();
       const form = e.currentTarget;
       const formData = new FormData(form);
       const data = Object.fromEntries(formData);
 
-      data.ownerId = session?.user?.id as string;
+      data.ownerId = session?.user?.id;
 
       try {
         const newU = new UserService();
@@ -25,7 +39,7 @@ export default function ProfileForm() {
           setError("");
           setNotice("Data Saved");
 
-          // updateSession(editedUser);
+          updateSession(editedUser.data.data);          
         } else {
           setError("Error saving data");
         }

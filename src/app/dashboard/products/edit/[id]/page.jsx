@@ -3,13 +3,14 @@
 import AddProductForm from "@/app/components/forms/addProductForm";
 import { useRouter } from "next/navigation";
 
+const uri = "http://localhost:3000";
+
 const Edit = async ({ params }) => {
   const router = useRouter();
   const getDataById = async (id) => {
     try {
-      const address_url = window.location.origin;
-      console.log(window.location.origin);
-      const response = await fetch(`${address_url}/api/product/${id}`, {
+      // const address_url = window.location.origin;      
+      const response = await fetch(`${uri}/api/product/${id}`, {
         cache: "no-store",
       });
       if (!response.ok) {
@@ -27,7 +28,7 @@ const Edit = async ({ params }) => {
 
   const onSubmitEdit = async (formData) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/product/${id}`, {
+      const response = await fetch(`${uri}/api/product/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

@@ -20,7 +20,7 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
   }, [formValues]);
 
   const btnBack = () => {
-    router.back();
+    router.push("/dashboard/products");
   };
 
   const handleSubmit = (e) => {
@@ -31,7 +31,6 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      
       <input
         className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
         type="text"
@@ -39,14 +38,18 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
         name="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        required
       />
-      <textarea cols="30" rows="5"
+      <textarea
+        cols="30"
+        rows="5"
         className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
-        type="string"   
-        name="description"     
+        type="string"
+        name="description"
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        required
       ></textarea>
       <input
         className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
@@ -56,6 +59,7 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
         placeholder="Price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
+        required
       />
       <input
         className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
@@ -64,17 +68,16 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
         placeholder="Stock"
         value={stock}
         onChange={(e) => setStock(e.target.value)}
+        required
       />
-      <div>
-        <button className="float-right bg-indigo-500 hover:bg-indigo-700 text-white font-bold p-3 px-6 rounded-md w-1/2">
+      <div className="justify-end">
+        <button className="float-right bg-indigo-500 hover:bg-indigo-700 text-white font-bold p-3 pl-6 ml-2 rounded-md w-1/3">
           Save
         </button>
-      </div>
-      <div>
         <button
           onClick={btnBack}
           type="button"
-          className="float-right bg-gray-400 hover:bg-gray-600 text-white font-bold p-3 px-6  rounded-md w-1/2"
+          className=" float-right bg-gray-400 hover:bg-gray-600 text-white font-bold p-3 px-6 rounded-md w-1/3"
         >
           Cancel
         </button>

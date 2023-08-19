@@ -2,8 +2,8 @@
 //Sweet Alert 2
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
 import { useRouter } from "next/navigation";
+const uri = "http://localhost:3000";
 
 const BtnDelete = ({ id }) => {
   const router = useRouter();
@@ -20,8 +20,7 @@ const BtnDelete = ({ id }) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const address_url = window.location.origin;
-        const response = await fetch(`${address_url}/api/product/${id}`, {
+        const response = await fetch(`${uri}/api/product/${id}`, {
           method: "DELETE",
         });
         if (response.ok) {
