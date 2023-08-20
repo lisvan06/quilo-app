@@ -2,9 +2,9 @@ import TableProducts from "@/app/components/client/tableProducts";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getSession } from "next-auth/react";
 
-export async function getData(user) {
+export default async function productsPage() {  
+async function getData(user) {
   try {
     const role = user.role;
     // role = "ADMIN";
@@ -19,7 +19,6 @@ export async function getData(user) {
   } catch (error) {}
 }
 
-export default async function productsPage() {
   const session = await getServerSession(authOptions);
   try {
     const data = await getData(session.user);
