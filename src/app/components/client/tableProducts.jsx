@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function TableProducts({ data }) {
+  //console.log(typeof data);
   const { data: session, status } = useSession();
   const router = useRouter();
 
