@@ -1,23 +1,25 @@
+import * as f from "util";
 import TableProducts from "@/app/components/client/tableProducts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import ProductService from "@/app/api/product/service";
 
-export default async function productsPage() {  
-  async function getData(user) {    
+export default async function productsPage() {
+  async function getData(user) {
     try {
-      const role = user.role;
-      // role = "ADMIN";
-      const res =
-        role === "USER"
-          ? await fetch(`${process.env.NEXTAUTH_URL}/api/product/search?ownerId=${user.id}`, {
-              cache: "no-store",
-            })
-          : await fetch(`/api/product`, {
-              cache: "no-store",
-            });
-      const data = await res.json();
+      var role = user.role;
+      //role = "ADMIN";
+      const newP = new ProductService();
 
-      return data;
+      const res = 
+        role === "USER"
+          ? await newP.getProductsByOwnerId(user.id)
+          : await newP.getAllProducts();
+
+          console.log(res.data);
+      const products = res.data;
+
+      return products;
     } catch (error) {}
   }
 
