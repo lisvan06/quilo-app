@@ -11,12 +11,12 @@ export default async function productsPage() {
       const res =
         role === "USER"
           ? await fetch(
-              `${process.env.BASE_URL}/api/product/search?ownerId=${user.id}`,
+              `/api/product/search?ownerId=${user.id}`,
               {
                 cache: "no-store",
               }
             )
-          : await fetch(`${process.env.BASE_URL}/api/product`, {
+          : await fetch(`/api/product`, {
               cache: "no-store",
             });
       const data = await res.json();
