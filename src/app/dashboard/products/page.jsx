@@ -2,19 +2,16 @@ import TableProducts from "@/app/components/client/tableProducts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export default async function productsPage() {
-  async function getData(user) {
-    try {      
+export default async function productsPage() {  
+  async function getData(user) {    
+    try {
       const role = user.role;
       // role = "ADMIN";
       const res =
         role === "USER"
-          ? await fetch(
-              `/api/product/search?ownerId=${user.id}`,
-              {
-                cache: "no-store",
-              }
-            )
+          ? await fetch(`${process.env.NEXTAUTH_URL}/api/product/search?ownerId=${user.id}`, {
+              cache: "no-store",
+            })
           : await fetch(`/api/product`, {
               cache: "no-store",
             });
@@ -24,9 +21,10 @@ export default async function productsPage() {
     } catch (error) {}
   }
 
-  const session = await getServerSession(authOptions);  
+  const session = await getServerSession(authOptions);
 
   try {
+    // console.log(session.user);
     const data = await getData(session.user);
     return (
       <>
