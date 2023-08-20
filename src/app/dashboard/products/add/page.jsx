@@ -1,28 +1,27 @@
 "use client";
-import AddProductForm from "../../../components/forms/addProductForm";
+import AddProductForm from "../../../components/client/addProductForm";
 import { useRouter } from "next/navigation";
-const uri ="http://localhost:3000";
 
 const AddProduct = () => {
   const router = useRouter();
 
   const onSubmitCreate = async (formData) => {
-    console.log("Datos capturados del Form: ", formData);
-    const { title, description, price, stock } = formData;
+    // console.log("Datos capturados del Form: ", formData);
+    const { title, description, price, stock, ownerId } = formData;
 
     if (!formData) {
       alert("Complete the fields.");
       return;
     }
-    //console.log(`Name: ${name} Age: ${age}`);
+    
     try {
       // const url = window.location.origin;
-      const response = await fetch(uri+'/api/product', {
+      const response = await fetch('/api/product', {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ title, description, price, stock }),
+        body: JSON.stringify({ title, description, price, stock, ownerId }),
       });
       if (response.ok) {
         router.refresh();

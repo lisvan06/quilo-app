@@ -1,31 +1,9 @@
 import Link from "next/link";
-import BtnDelete from "./btnDeleteProduct";
-import { getSession } from "next-auth/react";
+import BtnDelete from "../client/btnDeleteProduct";
 
-const uri = "http://localhost:3000";
-
-const getData = async () => {
-  var url = "";
-  // if (typeof window !== "undefined") {
-  //   url = window.location.origin;
-  // } else url = process.env.BASE_URL;
-
-  // if (url != "") {
-  try {
-    // url ="https://quilo-app-lisvan06.vercel.app/";
-    const response = await fetch(`/api/product`, {
-      cache: "no-store",
-    });
-    const res = await response.json();
-    return res;
-  } catch (error) {
-    console.log("Error : ", error);
-    // }
-  }
-};
-
-const ShowProduct = async () => {
-  const data = await getData();
+const ShowProduct = ({products}) => {
+  const data = products;
+  
   if (typeof data === "object") {
     return (
       <>
@@ -111,18 +89,5 @@ const ShowProduct = async () => {
     );
   } else return <></>;
 };
-
-export async function getServerSideProps() {
-  const response = await fetch(`${uri}/api/product`, {
-    cache: "no-store",
-  });
-  const res = await response.json();
-
-  return {
-    props: {
-      products: res,
-    },
-  };
-}
 
 export default ShowProduct;

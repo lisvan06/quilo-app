@@ -1,8 +1,7 @@
 import { FormEvent, useState } from "react";
 import { getSession, useSession } from "next-auth/react";
-
-import UserService from "@/app/api/user/service";
 import { useRouter } from "next/navigation";
+import UserService from "@/app/api/user/service";
 
 export default function ProfileForm() {
   const { data: session, status, update } = useSession();
@@ -32,7 +31,7 @@ export default function ProfileForm() {
       data.ownerId = session?.user?.id;
 
       try {
-        const newU = new UserService();
+        const newU = new UserService( );
         const editedUser = await newU.updateUser(data, data.ownerId);
 
         if (editedUser) {

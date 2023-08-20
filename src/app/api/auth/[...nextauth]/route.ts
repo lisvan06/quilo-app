@@ -1,9 +1,12 @@
 import NextAuth from "next-auth";
+import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import { prisma } from "@/app/lib/prisma/_base";
 
-const handler = NextAuth({
+import { prisma } from "@/app/lib/prisma/_base";
+import bcrypt from "bcryptjs";
+
+
+export const authOptions: NextAuthOptions = {
   // adapter: PrismaAdapter(prisma),
   providers: [
     process.env.VERCEL_ENV === "preview"
@@ -71,7 +74,7 @@ const handler = NextAuth({
         }),
   ],
   callbacks: {
-    jwt({ token, user, trigger, session }) {      
+    jwt({ token, user, trigger, session }) {
       if (trigger === "update") {
         token.user = session.user;
         return { ...token, ...user };
@@ -82,7 +85,7 @@ const handler = NextAuth({
       return { ...token, ...user };
     },
 
-    session({ session, token, user, trigger }) {      
+    session({ session, token, user, trigger }) {
       session.user = token.user as any;
       return session;
     },
@@ -90,6 +93,8 @@ const handler = NextAuth({
   pages: {
     signIn: "/login",
   },
-});
+}
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

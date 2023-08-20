@@ -5,10 +5,11 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  console.log("Im Here in Id");
   try {
     const data = await prisma.product.findUnique({
       where: {
-        id : params.id as string,
+        id: params.id as string,
       },
     });
     return NextResponse.json({ data: data }, { status: 200 });
@@ -22,13 +23,13 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const requestBody = await req.json();
-  
+
   try {
     const price = parseFloat(requestBody.price);
     requestBody.price = price;
     const stock = parseInt(requestBody.stock);
     requestBody.stock = stock;
-    
+
     const data = await prisma.product.update({
       where: {
         id: params.id,
@@ -54,6 +55,7 @@ export async function DELETE(
 ) {
   try {
     const data = await prisma.product.delete({
+      //Search soft_delete on prisma docs
       where: {
         id: params.id,
       },

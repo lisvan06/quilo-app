@@ -25,7 +25,7 @@ async function searchByKey(key: string, value: any) {
   if (key == "stock" || key == "price") val = Number(value);
   const data = await prisma.product.findMany({
     where: {
-      [key as string]: val,
+      [key as string]: value as string
     }
   });
 

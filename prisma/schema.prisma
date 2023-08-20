@@ -42,7 +42,7 @@ model Session {
 
 model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  username      String   @unique
+  username      String    @unique
   email         String?   @unique
   password      String
   emailVerified DateTime? @map("email_verified")
@@ -75,6 +75,7 @@ model Product {
   published   Boolean @default(false)
   owner       User?   @relation(fields: [ownerId], references: [id])
   ownerId     String? @db.ObjectId
+  deleted     Boolean  @default(false)
 
   @@map("products")
 }

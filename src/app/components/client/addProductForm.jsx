@@ -1,14 +1,19 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const AddProductForm = ({ formValues, onSubmitForm }) => {
+  const { data: session, status } = useSession ();
+
   const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [ownerId, setOwnerId] = useState(session?.user.id);
 
   useEffect(() => {
     if (formValues) {
@@ -16,6 +21,7 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
       setDescription(formValues.description);
       setPrice(formValues.price);
       setStock(formValues.stock);
+      setOwnerId(formValues.ownerId);
     }
   }, [formValues]);
 
@@ -25,12 +31,22 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = { title, description, price, stock };
+    const formData = { title, description, price, stock, ownerId };
     onSubmitForm(formData);
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+    <input
+      className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
+      type="string"
+      name="ownerId"
+      placeholder="OwnerId"
+      value={ownerId}
+      onChange={(e) => setOwnerId(e.target.value)}
+      required
+      hidden
+    />
       <input
         className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
         type="text"

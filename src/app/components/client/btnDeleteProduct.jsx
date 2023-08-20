@@ -1,9 +1,9 @@
-"use client";
 //Sweet Alert 2
+"use client";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/navigation";
-const uri = "http://localhost:3000";
 
 const BtnDelete = ({ id }) => {
   const router = useRouter();
@@ -20,13 +20,15 @@ const BtnDelete = ({ id }) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await fetch(`${uri}/api/product/${id}`, {
+        const response = await fetch(`/api/product/${id}`, {
           method: "DELETE",
         });
-        if (response.ok) {
+        if (response.ok === false) {
+          Swal.fire("Error!", "Your product has not been deleted.", "error");
+        } else {
           router.refresh();
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
   };
