@@ -4,8 +4,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function productsPage() {
   async function getData(user) {
-    try {
-      console.log(process.env.BASE_URL + "/api/product/search");
+    try {      
       const role = user.role;
       // role = "ADMIN";
       const res =
