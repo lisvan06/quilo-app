@@ -3,8 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function productsPage() {
-  const session = await getServerSession(authOptions);
-
   async function getData(user) {
     try {
       console.log(process.env.BASE_URL + "/api/product/search");
@@ -26,6 +24,8 @@ export default async function productsPage() {
       return data;
     } catch (error) {}
   }
+
+  const session = await getServerSession(authOptions);  
 
   try {
     const data = await getData(session.user);
