@@ -13,7 +13,8 @@ declare module "next-auth" {
       image: string,
       role: string,
       address: string,
-      enterprise: string
+      enterprise: string,
+      deleted: boolean
     }
   }
 }

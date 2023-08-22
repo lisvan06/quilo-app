@@ -4,12 +4,12 @@ import { prisma } from "@/app/lib/prisma/_base";
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
-) {
-  
+) {  
   try {
     const data = await prisma.product.findUnique({
       where: {
-        id: params.id as string
+        id: params.id as string,
+        deleted: false
       },
     });
     return NextResponse.json({ data: data }, { status: 200 });
@@ -33,6 +33,7 @@ export async function PUT(
     const data = await prisma.product.update({
       where: {
         id: params.id,
+        deleted: false
       },
       data: {
         title: requestBody.title,
@@ -58,6 +59,7 @@ export async function DELETE(
       //Search soft_delete on prisma docs
       where: {
         id: params.id,
+        deleted: false
       },
       data: {
         deleted: true,

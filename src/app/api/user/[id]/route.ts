@@ -6,9 +6,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const data = await prisma.user.findUnique({
+    const data = await prisma.user.findMany({
       where: {
-        id : params.id as string,
+        id: params.id as string,
       },
     });
     return NextResponse.json({ data: data }, { status: 200 });
@@ -45,11 +45,12 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const user = {deleted: true};
-    const data = await prisma.user.delete({
+    const user = {};
+    const data = await prisma.user.update({
       where: {
         id: params.id,
       },
+      data: {},
     });
     return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
@@ -62,11 +63,11 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const data = {deleted: true};
-    const data = await prisma.user.delete({
+    const data = await prisma.user.update({
       where: {
         id: params.id,
       },
+      data: {},
     });
     return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
