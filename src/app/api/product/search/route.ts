@@ -29,8 +29,7 @@ export async function GET(req: NextRequest) {
       }
     });
 
-    if (data.length > 0) return NextResponse.json(data, { status: 200 });
-    return NextResponse.json({ data: data }, { status: 200 });
+    return NextResponse.json(data, { status: 200 });
   }
 
   //make a switch case for all the search params
@@ -43,14 +42,7 @@ async function searchByKey(key: string, value: any) {
     where: {
       [key as string]: value as string,
       deleted: false,
-    },
-    include: {
-      users: {
-        where: {
-          id: value as string,
-        },
-      },
-    },
+    }
   });
 
   if (data.length > 0) return NextResponse.json(data, { status: 200 });
