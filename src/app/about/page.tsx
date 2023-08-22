@@ -1,13 +1,3 @@
-const people = [
-  {
-    name: "Leslie Alexander",
-    role: "Co-Founder / CEO",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  // More people...
-];
-
 export default function Example() {
   return (
     <div className="bg-white py-24 sm:py-32 dark:bg-black dark:text-white">
@@ -20,7 +10,7 @@ export default function Example() {
         <div className="items-center flex flex-col-1">
           <div className="flex flex-col bg-white max-w-xs p-6 m-5 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100 ">
             <img
-              src="https://source.unsplash.com/150x150/?portrait?3"
+              src="/images.png"
               alt=""
               className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square"
             />
@@ -95,7 +85,7 @@ export default function Example() {
         </div><div className="items-center flex flex-col-1">
           <div className="flex flex-col bg-white max-w-xs p-6 m-5 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100 ">
             <img
-              src="https://source.unsplash.com/150x150/?portrait?3"
+              src="/images.png"
               alt=""
               className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square"
             />
