@@ -30,7 +30,7 @@ const Edit = async ({ params }) => {
   const { data } = await getDataById(id);
 
   const categories = await catValues();
-  console.log("Data ", categories);
+  // console.log("Data ", categories);
 
   return (
     <>

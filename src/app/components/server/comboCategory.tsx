@@ -16,8 +16,8 @@ export type SelectProps = {
   options: { id: String; title: string }[];
 };
 
-const childToParent = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  return e.target.value;
+function childToParent (e: any) {
+  return e;
 };
 
 export const ComboCategory = ({
@@ -34,7 +34,7 @@ export const ComboCategory = ({
       <select
         name="categoryId"
         id="comboProdCat"        
-        onChange={childToParent}
+        onChange={childToParent as any}
         className="border border-slate-500 px-8 py-2 mx-0 dark:text-zinc-600 rounded-md"       
       >
         <option value="select">-- Select a Category --</option>

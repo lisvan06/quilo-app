@@ -34,6 +34,7 @@ const AddProductForm = ({ formValues, categories, myAction, id }) => {
   };
 
   const childToParent = (e) => {
+    console.log("Category ...", e);
     setCategoryId(e.target.value);
   };
 
