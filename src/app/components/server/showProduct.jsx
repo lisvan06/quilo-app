@@ -2,24 +2,30 @@ import Link from "next/link";
 import BtnDelete from "../client/btnDeleteProduct";
 
 const ShowProduct = ({products}) => {
-  const data = products;
-  // console.log(data);
+  const data = products.products;
+  const user = products;
+  // console.log("Username... ", products.username);
   if (Array.isArray(data)) {
     return (
       <>
         {data.map((element) => (
           <tr key={element.id}>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
               <div className="flex items-center">
                 <div className="flex-shrink-0 w-10 h-10">
-                  <img
-                    className="w-full h-full rounded-full"
-                    src="/next.svg"
-                    // src="https:images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                    alt=""
-                  />
+                  
+                  <h1 className="text-gray-900 whitespace-no-wrap">{user.username}</h1>
                 </div>
               </div>
+            </td> */}
+            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <Link
+                href={`/dashboard/user/${user.id}`}
+                className="inline-flex items-center px-5 py-2 text-sm font-medium text-center text-white"
+              ><p className="text-gray-900 whitespace-no-wrap">
+                {user.username}
+              </p></Link>
+              
             </td>
             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
               <p className="text-gray-900 whitespace-no-wrap">
@@ -43,7 +49,7 @@ const ShowProduct = ({products}) => {
             </td>
             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
               {element.published ? (
-                <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                <span className="relative inline-block py-1 font-semibold text-green-900 leading-tight">
                   <span
                     aria-hidden
                     className="absolute inset-0 bg-green-200 opacity-50 rounded-full"

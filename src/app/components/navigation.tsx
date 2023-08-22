@@ -49,6 +49,27 @@ export default function NavigationBar() {
       authenticated: false,
     },
     {
+      name: "About",
+      id: "navabout",
+      href: "/about",
+      current: pathname == "/about" ? true : false,
+      authenticated: false,
+    },
+    {
+      name: "Contact",
+      id: "navcontact",
+      href: "/contact",
+      current: pathname == "/contact" ? true : false,
+      authenticated: false,
+    },
+    {
+      name: "Help",
+      id: "navhelp",
+      href: "/help",
+      current: pathname == "/help" ? true : false,
+      authenticated: false,
+    },
+    {
       name: "Dashboard",
       id: "navdb",
       href: "/dashboard",
@@ -70,26 +91,19 @@ export default function NavigationBar() {
       authenticated: true,
     },
     {
-      name: "About",
-      id: "navabout",
-      href: "/about",
-      current: pathname == "/about" ? true : false,
-      authenticated: false,
+      name: "Categories",
+      id: "navcategories",
+      href: "/dashboard/category",
+      current: pathname == "/dashboard/category" ? true : false,
+      authenticated: true,
     },
     {
-      name: "Contact",
-      id: "navcontact",
-      href: "/contact",
-      current: pathname == "/contact" ? true : false,
-      authenticated: false,
-    },
-    // {
-    //   name: "Help",
-    //   id: "navhelp",
-    //   href: "/help",
-    //   current: pathname == "/help" ? true : false,
-    //   authenticated: false,
-    // },
+      name: "Users",
+      id: "navusers",
+      href: "#",
+      current: pathname == "/dashboard/user" ? true : false,
+      authenticated: true,
+    }
   ];
 
   return (

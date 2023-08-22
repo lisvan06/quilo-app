@@ -14,7 +14,24 @@ export async function GET(req: NextRequest) {
   if (description) return await searchByKey("description", description);
   if (stock) return await searchByKey("stock", stock);
   if (price) return await searchByKey("price", price);
-  if (ownerId) return await searchByKey("ownerId", ownerId);
+  if (ownerId) {
+    const data = await prisma.user.findUnique({
+      where: {
+        id: ownerId,
+        // deleted: false,
+      },
+      include: {
+        products: {
+          where: {
+            ownerId: ownerId,
+          }
+        }
+      }
+    });
+
+    if (data.length > 0) return NextResponse.json(data, { status: 200 });
+    return NextResponse.json({ data: data }, { status: 200 });
+  }
 
   //make a switch case for all the search params
 }
@@ -26,6 +43,13 @@ async function searchByKey(key: string, value: any) {
     where: {
       [key as string]: value as string,
       deleted: false,
+    },
+    include: {
+      users: {
+        where: {
+          id: value as string,
+        },
+      },
     },
   });
 
