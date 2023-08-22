@@ -24,17 +24,20 @@ export default function RegisterPage() {
         password,
       });
 
-      if (signUpResponse.status === 200) { //If user has been registered correctly
-        const res = await signIn("credentials", { //Sign in the user
+      if (signUpResponse.status === 200) {
+        //If user has been registered correctly
+        const res = await signIn("credentials", {
+          //Sign in the user
           email: email,
           password: password as string,
           redirect: false,
         });
 
-        if (res?.ok) { //If sign in was successful
+        if (res?.ok) {
+          //If sign in was successful
           // redirect("/dashboard/profile");
           router.refresh();
-          return router.push('/dashboard/profile');
+          return router.push("/dashboard/profile");
         }
       }
     } catch (error) {
@@ -46,12 +49,17 @@ export default function RegisterPage() {
 
   return (
     <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col">
+      <img
+        src="/tiendaonline.jpg"
+        alt=""
+        className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center brightness-50"
+      />
       {error && <p className="text-red-500 text-lg mb-2">{error}</p>}
 
       <h1 className="text-4xl font-bold mb-2">Register</h1>
       <p className="text-lg mb-2">
         Already have an account?{" "}
-        <a href="/login" className="text-indigo-500">
+        <a href="/login" className="text-cyan-400">
           Login
         </a>
       </p>
@@ -79,9 +87,11 @@ export default function RegisterPage() {
           className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
           required
         />
-        <button className="float-right bg-indigo-500 px-6 py-2 mt-2 rounded-md text-white hover:bg-indigo-600 transition-colors">
-          Register
-        </button>
+        <div className="flex place-content-center">
+          <button className="bg-indigo-500 px-6 py-2 mt-2 rounded-md text-white hover:bg-indigo-600 transition-colors">
+            Register
+          </button>
+        </div>
       </form>
     </div>
   );

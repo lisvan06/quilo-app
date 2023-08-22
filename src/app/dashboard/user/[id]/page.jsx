@@ -5,7 +5,7 @@ const shoProductPage = async ({ params }) => {
   async function getData() {
     try {
       const newU = new UserService();
-      const res = await newU.getUser(id);      
+      const res = await newU.getUser(id);
       return res;
     } catch (error) {}
   }
@@ -17,6 +17,14 @@ const shoProductPage = async ({ params }) => {
   return (
     <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col-1">
       <div className="flex flex-col bg-white max-w-xs p-6 m-5 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100 ">
+        <div className="flex justify-end overflow-visible relative -right-16 -top-10 bg-zinc-500">
+          <a
+            href="/dashboard/products"
+            className="flex absolute top-0 right-0 w-8 h-8 grow-0 shrink-0   rounded-full outline-none justify-center align-middle dark:text-zinc-500 border-2 dark:bg-gray-900 dark:border-zinc-800"
+          >
+            x
+          </a>
+        </div>
         <img
           src="/images.png"
           alt=""

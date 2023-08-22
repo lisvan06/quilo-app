@@ -1,12 +1,17 @@
 export default function Example() {
   return (
-    <div className="bg-white py-24 sm:py-32 dark:bg-black dark:text-white">
+    <div className="py-24 sm:py-32 dark:text-white">
       <div className="w-full justify-center text-center">
-          <h2 className="text-3xl justify-center font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-zinc-400">
-            Meet our leadership
-          </h2>
-        </div>
-      <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-2 w-1/2 justify-center">        
+        <img
+          src="/tiendaonline.jpg"
+          alt=""
+          className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center brightness-50"
+        />
+        <h2 className="text-3xl justify-center font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-zinc-400">
+          Meet our leadership
+        </h2>
+      </div>
+      <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-2 w-1/2 justify-center">
         <div className="items-center flex flex-col-1">
           <div className="flex flex-col bg-white max-w-xs p-6 m-5 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100 ">
             <img
@@ -82,7 +87,8 @@ export default function Example() {
             </div>
           </div>
           <hr className="mb-4" />
-        </div><div className="items-center flex flex-col-1">
+        </div>
+        <div className="items-center flex flex-col-1">
           <div className="flex flex-col bg-white max-w-xs p-6 m-5 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100 ">
             <img
               src="/images.png"

@@ -33,6 +33,11 @@ export default function NavigationBar() {
       href: "/dashboard/products",
     },
     {
+      id: "menuCategories",
+      name: "Categories",
+      href: "/dashboard/category",
+    },
+    {
       id: "menuLogout",
       name: "Logout",
       href: "/api/auth/signout",
@@ -97,13 +102,13 @@ export default function NavigationBar() {
       current: pathname == "/dashboard/category" ? true : false,
       authenticated: true,
     },
-    {
-      name: "Users",
-      id: "navusers",
-      href: "#",
-      current: pathname == "/dashboard/user" ? true : false,
-      authenticated: true,
-    }
+    // {
+    //   name: "Users",
+    //   id: "navusers",
+    //   href: "#",
+    //   current: pathname == "/dashboard/user" ? true : false,
+    //   authenticated: true,
+    // }
   ];
 
   return (

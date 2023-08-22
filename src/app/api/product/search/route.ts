@@ -45,6 +45,5 @@ async function searchByKey(key: string, value: any) {
     }
   });
 
-  if (data.length > 0) return NextResponse.json(data, { status: 200 });
   return NextResponse.json({ data: data }, { status: 200 });
 }

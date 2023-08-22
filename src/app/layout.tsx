@@ -20,9 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
 
-      <body className={inter.className}>
+      <body className={inter.className}>        
         <Providers>
-          <NavigationBar />
+          <NavigationBar />          
           {children}
         </Providers>
       </body>

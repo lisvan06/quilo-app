@@ -20,7 +20,8 @@ export default async function productsPage() {
 
           //With this implementation the page dont show the products list
 
-      const products = res.data.data;
+      const products = res.data;
+      // console.log(products);
 
       return products;
     } catch (error) {}
