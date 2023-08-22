@@ -1,5 +1,5 @@
-import { FormEvent, useState } from "react";
-import { getSession, useSession } from "next-auth/react";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import UserService from "@/app/api/user/service";
 
@@ -10,14 +10,14 @@ export default function ProfileForm() {
 
   const router = useRouter();
 
-  async function updateSession(user) {    
+  async function updateSession(user) {
     await update({
       ...session,
       user: {
         ...session?.user,
         enterprise: user.enterprise,
         address: user.address,
-      }
+      },
     });
   }
 
@@ -31,14 +31,14 @@ export default function ProfileForm() {
       data.ownerId = session?.user?.id;
 
       try {
-        const newU = new UserService( );
+        const newU = new UserService();
         const editedUser = await newU.updateUser(data, data.ownerId);
 
         if (editedUser) {
           setError("");
           setNotice("Data Saved");
 
-          updateSession(editedUser.data.data);          
+          updateSession(editedUser.data.data);
         } else {
           setError("Error saving data");
         }
