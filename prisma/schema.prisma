@@ -53,6 +53,7 @@ model User {
   address       String?
   accounts      Account[]
   sessions      Session[]
+  deleted       Boolean   @default(false)
 
   @@map("users")
 }
@@ -67,22 +68,26 @@ model VerificationToken {
 }
 
 model Product {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   description String
   stock       Int
   price       Float
-  published   Boolean @default(false)
-  owner       User?   @relation(fields: [ownerId], references: [id])
-  ownerId     String? @db.ObjectId
-  deleted     Boolean  @default(false)
+  published   Boolean   @default(false)
+  owner       User?     @relation(fields: [ownerId], references: [id])
+  ownerId     String?   @db.ObjectId
+  deleted     Boolean   @default(false)
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String    @db.ObjectId
 
   @@map("products")
 }
 
 model Category {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  Product Product[]
+  deleted Boolean   @default(false)
 
   @@map("categories")
 }

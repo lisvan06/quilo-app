@@ -3,8 +3,8 @@ import BtnDelete from "../client/btnDeleteProduct";
 
 const ShowProduct = ({products}) => {
   const data = products;
-  
-  if (typeof data === "object") {
+  // console.log(data);
+  if (Array.isArray(data)) {
     return (
       <>
         {data.map((element) => (

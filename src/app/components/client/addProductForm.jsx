@@ -3,25 +3,29 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { ComboCategory } from "@/app/components/server/comboCategory";
 
-const AddProductForm = ({ formValues, onSubmitForm }) => {
-  const { data: session, status } = useSession ();
-
+const AddProductForm = ({ formValues, categories, myAction, id }) => {
+  const { data: session, status } = useSession();
   const router = useRouter();
+  const productId = id;
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
-  const [ownerId, setOwnerId] = useState(session?.user.id);
+  const [description, setDescription] = useState("");
+  const [ownerId, setOwnerId] = useState("");
+  const [categoryId, setCategoryId] = useState("");
 
   useEffect(() => {
     if (formValues) {
+      // console.log(formValues);
       setTitle(formValues.title);
       setDescription(formValues.description);
       setPrice(formValues.price);
       setStock(formValues.stock);
       setOwnerId(formValues.ownerId);
+      setCategoryId(formValues.categoryId);
     }
   }, [formValues]);
 
@@ -29,24 +33,93 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
     router.push("/dashboard/products");
   };
 
+  const childToParent = (e) => {
+    setCategoryId(e.target.value);
+  };
+
+  const onSubmitCreate = async (formData) => {
+    console.log("Creating...");
+    formData.ownerId = session?.user.id;
+    // console.log("Datos capturados del Form: ", formData);
+    const { title, description, price, stock, ownerId, categoryId } = formData;
+
+    if (!formData) {
+      alert("Complete the fields.");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/product", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          price,
+          stock,
+          ownerId,
+          categoryId,
+        }),
+      });
+
+      const response = await res.json();
+      // console.log("Response ", response);
+      if (response) {
+        router.refresh();
+        router.push("/dashboard/products");
+      } else {
+        throw new Error("Failed to create.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
+  const onSubmitEdit = async (formData) => {
+    console.log("Editing...");  
+    try {
+      const response = await fetch(`/api/product/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update.");
+      }
+      router.refresh();
+      router.push("/dashboard/products");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = { title, description, price, stock, ownerId };
-    onSubmitForm(formData);
+    const formData = { title, description, price, stock, ownerId, categoryId };
+
+    if (myAction == "edit") onSubmitEdit(formData);
+    else onSubmitCreate(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-    <input
-      className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
-      type="string"
-      name="ownerId"
-      placeholder="OwnerId"
-      value={ownerId}
-      onChange={(e) => setOwnerId(e.target.value)}
-      required
-      hidden
-    />
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-3 dark:text-zinc-600 rounded-md"
+    >
+      <input
+        type="text"
+        name="ownerId"
+        placeholder="Owner Id"
+        defaultValue={session?.user.id}
+        onChange={(e) => setOwnerId(session?.user.id)}
+        hidden
+      />
       <input
         className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
         type="text"
@@ -56,6 +129,7 @@ const AddProductForm = ({ formValues, onSubmitForm }) => {
         onChange={(e) => setTitle(e.target.value)}
         required
       />
+      {<ComboCategory categories={categories} childToParent={childToParent} />}
       <textarea
         cols="30"
         rows="5"

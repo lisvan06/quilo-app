@@ -5,11 +5,11 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  console.log("Im Here in Id");
+  
   try {
     const data = await prisma.product.findUnique({
       where: {
-        id: params.id as string,
+        id: params.id as string
       },
     });
     return NextResponse.json({ data: data }, { status: 200 });
@@ -54,10 +54,13 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const data = await prisma.product.delete({
+    const data = await prisma.product.update({
       //Search soft_delete on prisma docs
       where: {
         id: params.id,
+      },
+      data: {
+        deleted: true,
       },
     });
     return NextResponse.json({ data: data }, { status: 200 });

@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   const stock = searchParams.get("stock");
   const price = searchParams.get("price");
   const ownerId = searchParams.get("ownerId");
-  
+
   if (title) return await searchByKey("title", title);
   if (description) return await searchByKey("description", description);
   if (stock) return await searchByKey("stock", stock);
@@ -17,7 +17,6 @@ export async function GET(req: NextRequest) {
   if (ownerId) return await searchByKey("ownerId", ownerId);
 
   //make a switch case for all the search params
-  
 }
 
 async function searchByKey(key: string, value: any) {
@@ -25,9 +24,11 @@ async function searchByKey(key: string, value: any) {
   if (key == "stock" || key == "price") val = Number(value);
   const data = await prisma.product.findMany({
     where: {
-      [key as string]: value as string
-    }
+      [key as string]: value as string,
+      deleted: false,
+    },
   });
 
-  return NextResponse.json(data, { status: 200 });
+  if (data.length > 0) return NextResponse.json(data, { status: 200 });
+  return NextResponse.json({ data: data }, { status: 200 });
 }

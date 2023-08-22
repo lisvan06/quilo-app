@@ -13,11 +13,12 @@ export async function GET() {
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const requestBody = await req.json();
+    console.log(requestBody);
     if (!requestBody)
       return NextResponse.json({ data: "No body provided" }, { status: 400 });
     const price = parseFloat(requestBody.price);
-    requestBody.price = price;
     const stock = parseInt(requestBody.stock);
+    requestBody.price = price;
     requestBody.stock = stock;
     const result = await prisma.product.create({ data: requestBody });
     if (result) return NextResponse.json(result, { status: 201 });

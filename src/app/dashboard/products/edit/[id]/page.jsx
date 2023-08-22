@@ -1,19 +1,26 @@
-"use client";
-
+import CategoryService from "@/app/api/category/service";
+import ProductService from "@/app/api/product/service";
 import AddProductForm from "@/app/components/client/addProductForm";
-import { useRouter } from "next/navigation";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const Edit = async ({ params }) => {
-  const router = useRouter();
+  // const session = await getServerSession (authOptions);
+  async function catValues() {
+    const catServ = new CategoryService();
+    const res = await catServ.getAllCategories();
+    const categories = res.data;
+
+    return categories.data;
+  }
+
   const getDataById = async (id) => {
     try {
-      // const address_url = window.location.origin;      
-      const response = await fetch(`/api/product/${id}`, {
-        cache: "no-store",
-      });
-      if (!response.ok) {
-        throw new Error("Failed to update.");
-      } else return response.json();
+      const prodServ = new ProductService();
+      const res = await prodServ.getProductById(id);
+
+      const products = res.data;
+      return products;
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -21,28 +28,9 @@ const Edit = async ({ params }) => {
 
   const id = params.id;
   const { data } = await getDataById(id);
-  //console.log("documento completo :"+JSON.stringify(data)); //recibo el documento
-  //const {name, age} = data
 
-  const onSubmitEdit = async (formData) => {
-    try {
-      const response = await fetch(`/api/product/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update.");
-      }
-      router.refresh();
-      router.push("/dashboard/products");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const categories = await catValues();
+  console.log("Data ", categories);
 
   return (
     <>
@@ -52,7 +40,7 @@ const Edit = async ({ params }) => {
             Edit Product
           </h1>
         </div>
-        <AddProductForm onSubmitForm={onSubmitEdit} formValues={data} />
+        <AddProductForm formValues={data} categories={categories} myAction="edit" id={params.id} />
       </div>
     </>
   );

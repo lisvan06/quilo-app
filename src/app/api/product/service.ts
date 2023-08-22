@@ -5,7 +5,20 @@ import axios, { AxiosError } from "axios";
 export default class ProductService {
   async getAllProducts<PrismaClient>() {
     try {
-      const products = await axios.get(process.env.NEXTAUTH_URL+"/api/product");
+      const products = await axios.get(
+        process.env.NEXTAUTH_URL + "/api/product"
+      );
+      return products;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async getProductById<PrismaClient>(id: string){
+    try {
+      const products = await axios.get(
+        process.env.NEXTAUTH_URL + "/api/product/" + id
+      );
       return products;
     } catch (error) {
       return false;
@@ -13,12 +26,14 @@ export default class ProductService {
   }
 
   async getProductsByOwnerId<PrismaClient>(id: string) {
+    // console.log("EHere in Product Service", "/api/product/search?ownerId=" + id);
     try {
-      const products = await axios.get(process.env.NEXTAUTH_URL+"/api/product/search?ownerId="+id);
+      const products = await axios.get(
+        process.env.NEXTAUTH_URL + "/api/product/search?ownerId=" + id
+      );
       return products;
     } catch (error) {
       return false;
     }
-  
   }
 }

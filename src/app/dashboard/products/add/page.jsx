@@ -1,51 +1,32 @@
-"use client";
+import CategoryService from "@/app/api/category/service";
 import AddProductForm from "../../../components/client/addProductForm";
-import { useRouter } from "next/navigation";
 
-const AddProduct = () => {
-  const router = useRouter();
-
-  const onSubmitCreate = async (formData) => {
-    // console.log("Datos capturados del Form: ", formData);
-    const { title, description, price, stock, ownerId } = formData;
-
-    if (!formData) {
-      alert("Complete the fields.");
-      return;
-    }
+const AddProduct = async () => {
+  async function catValues() {
+    const catServ = new CategoryService();
+    const res = await catServ.getAllCategories();
+    const categories = res.data;
     
-    try {
-      // const url = window.location.origin;
-      const response = await fetch('/api/product', {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ title, description, price, stock, ownerId }),
-      });
-      if (response.ok) {
-        router.refresh();
-        router.push("/dashboard/products");
-      } else {
-        throw new Error("Failed to create.");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    return categories.data;
+  }
 
-  return (
-    <>
-      <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col ">
-      <div className="justify-center text-center">
-        <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
-          Add Product
-        </h1>
-      </div>
-        <AddProductForm onSubmitForm={onSubmitCreate} />
-      </div>
-    </>
-  );
+  try {
+    const categories = await catValues();
+    return (
+      <>
+        <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col ">
+          <div className="justify-center text-center">
+            <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
+              Add Product
+            </h1>
+          </div>
+          <AddProductForm categories={categories} myAction="create"/>
+        </div>
+      </>
+    );
+  } catch (error) {
+    
+  }  
 };
 
 export default AddProduct;

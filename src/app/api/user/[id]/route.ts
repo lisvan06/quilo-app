@@ -40,11 +40,29 @@ export async function PUT(
   }
 }
 
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const user = {deleted: true};
+    const data = await prisma.user.delete({
+      where: {
+        id: params.id,
+      },
+    });
+    return NextResponse.json({ data: data }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
+}
+
 export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
+    const data = {deleted: true};
     const data = await prisma.user.delete({
       where: {
         id: params.id,
