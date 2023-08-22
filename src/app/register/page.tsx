@@ -48,12 +48,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col">
-      <img
-        src="/tiendaonline.jpg"
-        alt=""
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center brightness-50"
-      />
+    <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col bg-[url('/tiendaonline-65.jpg')] bg-fixed bg-left-top bg-cover">
+      
       {error && <p className="text-red-500 text-lg mb-2">{error}</p>}
 
       <h1 className="text-4xl font-bold mb-2">Register</h1>

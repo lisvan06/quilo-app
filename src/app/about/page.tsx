@@ -1,13 +1,9 @@
 export default function Example() {
   return (
-    <div className="py-24 sm:py-32 dark:text-white">
-      <div className="w-full justify-center text-center">
-        <img
-          src="/tiendaonline.jpg"
-          alt=""
-          className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center brightness-50"
-        />
-        <h2 className="text-3xl justify-center font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-zinc-400">
+    <div className="py-24 sm:py-32 dark:text-white justify-center h-[calc(100vh-4rem)] items-center flex flex-col bg-[url('/tiendaonline-65.jpg')] bg-fixed bg-left-top bg-cover">
+      <div className="w-full justify-center text-center ">
+        
+        <h2 className="text-3xl justify-center font-bold tracking-tight text-gray-500 sm:text-4xl dark:text-white">
           Meet our leadership
         </h2>
       </div>
