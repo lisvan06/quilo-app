@@ -12,7 +12,7 @@ export default function ProfilePage() {
 
       <div className="flex flex-col bg-white max-w-xs p-6 m-5 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100 ">
         <img
-          src="https://source.unsplash.com/150x150/?portrait?3"
+          src="/images.png"
           alt=""
           className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square"
         />
