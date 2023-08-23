@@ -11,7 +11,7 @@ const Edit = async ({ params }) => {
     const res = await catServ.getAllCategories();
     const categories = res.data;
 
-    return categories.data;
+    return categories;
   }
 
   const getDataById = async (id) => {
@@ -26,24 +26,31 @@ const Edit = async ({ params }) => {
     }
   };
 
-  const id = params.id;
-  const { data } = await getDataById(id);
+  try {
+    const id = params.id;
+    const { data } = await getDataById(id);
 
-  const categories = await catValues();
-  // console.log("Data ", categories);
+    const categories = await catValues();
+    // console.log("Data ", categories);
 
-  return (
-    <>
-      <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col ">
-        <div className="justify-center text-center">
-          <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
-            Edit Product
-          </h1>
+    return (
+      <>
+        <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col ">
+          <div className="justify-center text-center">
+            <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
+              Edit Product
+            </h1>
+          </div>
+          <AddProductForm
+            formValues={data}
+            categories={categories}
+            myAction="edit"
+            id={params.id}
+          />
         </div>
-        <AddProductForm formValues={data} categories={categories} myAction="edit" id={params.id} />
-      </div>
-    </>
-  );
+      </>
+    );
+  } catch (error) {}
 };
 
 export default Edit;

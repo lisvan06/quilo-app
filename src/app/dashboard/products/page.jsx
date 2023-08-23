@@ -16,12 +16,7 @@ export default async function productsPage() {
           ? await newP.getProductsByOwnerId(user.id)
           : await newP.getAllProducts();
 
-          // console.log(res.data.data.products);
-
-          //With this implementation the page dont show the products list
-
       const products = res.data;
-      // console.log(products);
 
       return products;
     } catch (error) {}

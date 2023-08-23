@@ -7,7 +7,7 @@ const AddProduct = async () => {
     const res = await catServ.getAllCategories();
     const categories = res.data;
     
-    return categories.data;
+    return categories;
   }
 
   try {
