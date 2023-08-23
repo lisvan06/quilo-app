@@ -20,7 +20,7 @@ export default function TableCategories({ data }) {
           <div className="">
             <div className="flex flex-col items-start mb-3">
               <button
-                className="px-4 py-2 bg-blue-500 rounded-lg"
+                className="px-4 py-2 text-white bg-blue-500 rounded-lg"
                 onClick={handleClickAdd}
               >
                 Add

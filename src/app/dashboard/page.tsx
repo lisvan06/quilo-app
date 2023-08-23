@@ -12,9 +12,9 @@ export default function DashBoardPage() {
     },
   });
 
-  if (status === "loading") {
-    return "Loading ...";
-  } else {
+  // if (status === "loading") {
+  //   return "Loading ...";
+  // } else {
     return (
       <>
         <div className="ml-auto mb-6">
@@ -796,5 +796,5 @@ export default function DashBoardPage() {
         </div>
       </>
     );
-  }
+  // }
 }

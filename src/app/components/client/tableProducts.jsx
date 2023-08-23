@@ -4,8 +4,8 @@ import ShowProduct from "@/app/components/server/showProduct";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function TableProducts({ data }) {
-  //console.log(typeof data);
+export default function TableProducts({ products }) {
+  // console.log("Products", products);
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -18,7 +18,7 @@ export default function TableProducts({ data }) {
       <div className="bg-white p-8 w-full dark:bg-gray-900 ">
         <div className=" flex items-center">
           <button
-            className="px-4 py-2 bg-blue-500 rounded-lg"
+            className="px-4 py-2 text-white bg-blue-500 rounded-lg"
             onClick={handleClickAdd}
           >
             Add
@@ -57,7 +57,7 @@ export default function TableProducts({ data }) {
                     </th>
                   </tr>
                 </thead>
-                <tbody>{<ShowProduct products={data} name={"product"}/>}</tbody>
+                <tbody>{<ShowProduct products={products} name={"product"}/>}</tbody>
               </table>
               <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                 <span className="text-xs xs:text-sm text-gray-900">

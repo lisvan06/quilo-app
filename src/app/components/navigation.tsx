@@ -144,9 +144,9 @@ export default function NavigationBar() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "dark:bg-gray-500 text-white dark:text-white"
+                              ? "bg-gray-500 text-white hover:bg-gray-600 dark:text-white"
                               : "text-gray-800 hover:bg-gray-600 hover:text-white",
-                              "rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300"
+                              "rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-whit"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -206,7 +206,7 @@ export default function NavigationBar() {
                   <>
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none">
+                        <Menu.Button className="relative flex rounded-full dark:bg-gray-800 text-sm focus:outline-none">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
                           <span className="text-xs m-2">
@@ -238,7 +238,7 @@ export default function NavigationBar() {
                                   href={item.href}
                                   className={classNames(
                                     active ? "" : "",
-                                    "block px-4 py-2 text-sm text-gray-700 dark:text-white dark:hover:bg-gray-900"
+                                    "block px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-900"
                                   )}
                                 >
                                   {item.name}
@@ -267,7 +267,7 @@ export default function NavigationBar() {
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        : "text-gray-800 hover:bg-gray-600 hover:text-white",
                       "block rounded-md px-3 py-2 text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}
@@ -283,8 +283,8 @@ export default function NavigationBar() {
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium"
+                        : "text-gray-800 hover:bg-gray-600 hover:text-white",
+                        "block rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300"
                     )}
                     aria-current={item.current ? "page" : undefined}
                   >

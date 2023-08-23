@@ -17,7 +17,6 @@ export default async function productsPage() {
           : await newP.getAllProducts();
 
       const products = res.data;
-
       return products;
     } catch (error) {}
   }
@@ -27,9 +26,10 @@ export default async function productsPage() {
   try {
     // console.log(session.user);
     const data = await getData(session.user);
+    // console.log("Products... ", data);
     return (
       <>
-        <TableProducts data={data}></TableProducts>
+        <TableProducts products={data}></TableProducts>
       </>
     );
   } catch (error) {}

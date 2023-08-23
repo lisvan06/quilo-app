@@ -60,14 +60,14 @@ export default function ProfileForm() {
             type="text"
             name="id"
             placeholder="Some Title"
-            className="bg-zinc-800 px-4 py-2 mb-2 text-white hidden"
+            className="bg-zinc-100 dark:bg-zinc-800 px-4 py-2 mb-2 text-white hidden"
             defaultValue={session?.user?.id}
           />
           <input
             type="textarea"
             name="enterprise"
             placeholder="My Enterprise"
-            className="bg-zinc-500 px-4 py-2 block mb-2 rounded-md"
+            className="bg-zinc-100 dark:bg-zinc-500 px-4 py-2 block mb-2 rounded-md"
             required
             defaultValue={session?.user?.enterprise}
           />
@@ -75,11 +75,11 @@ export default function ProfileForm() {
             type="text"
             name="address"
             placeholder="My Address"
-            className="bg-zinc-500 px-4 py-2 block mb-2 rounded-md"
+            className="bg-zinc-100 dark:bg-zinc-500 px-4 py-2 block mb-2 rounded-md"
             required
             defaultValue={session?.user?.address}
           />
-          <button className="w-1/2 bg-indigo-500 py-2 px-4 mt-2 rounded-md hover:bg-indigo-600 transition-colors">
+          <button className="w-1/2 text-white bg-indigo-500 py-2 px-4 mt-2 rounded-md hover:bg-indigo-600 transition-colors">
             Save
           </button>
 

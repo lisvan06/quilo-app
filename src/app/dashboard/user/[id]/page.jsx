@@ -20,7 +20,7 @@ const shoProductPage = async ({ params }) => {
         <div className="flex justify-end overflow-visible relative -right-16 -top-10 bg-zinc-500">
           <a
             href="/dashboard/products"
-            className="flex absolute top-0 right-0 w-8 h-8 grow-0 shrink-0   rounded-full outline-none justify-center align-middle dark:text-zinc-500 border-2 dark:bg-gray-900 dark:border-zinc-800"
+            className="flex absolute top-0 right-0 w-8 h-8 grow-0 shrink-0 rounded-full outline-none justify-center align-middle dark:text-zinc-500 border-2 dark:bg-gray-900 dark:border-zinc-800 bg-zinc-300 shadow-lg text-center"
           >
             x
           </a>

@@ -1,19 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma/_base";
 
+interface MySearchParams {
+  title?: string;
+  description?: string;
+  stock?: string;
+  price?: string;
+  ownerId?: string;
+};
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
+  // const {title, description, stock, price, ownerId} = searchParams as MySearchParams || {};
   const title = searchParams.get("title");
   const description = searchParams.get("description");
   const stock = searchParams.get("stock");
   const price = searchParams.get("price");
   const ownerId = searchParams.get("ownerId");
 
+  // const where = {};
+
+  // pendiente a revision
+  // if (title) where["title"] = title;
+  // if (description) where["description"] = description;
+  // if (stock) where["stock"] = stock;
+  // if (price) where["price"] = price;
+
   if (title) return await searchByKey("title", title);
   if (description) return await searchByKey("description", description);
   if (stock) return await searchByKey("stock", stock);
   if (price) return await searchByKey("price", price);
+  
   if (ownerId) {
     const data = await prisma.user.findUnique({
       where: {

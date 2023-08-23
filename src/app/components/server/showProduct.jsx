@@ -3,6 +3,7 @@ import BtnDelete from "../client/btnDelete";
 import BtnEdit from "../client/btnEdit";
 
 const ShowProduct = ({products, name}) => {
+  // console.log(products);
   const data = products.products;
   const user = products;
   // console.log("Username... ", products.username);
