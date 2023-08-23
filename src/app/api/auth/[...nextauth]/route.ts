@@ -1,10 +1,9 @@
 import NextAuth from "next-auth";
-import type { NextAuthOptions } from 'next-auth'
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { prisma } from "@/app/lib/prisma/_base";
 import bcrypt from "bcryptjs";
-
 
 export const authOptions: NextAuthOptions = {
   // adapter: PrismaAdapter(prisma),
@@ -67,8 +66,11 @@ export const authOptions: NextAuthOptions = {
                 userFounded!.password
               );
 
-              if (passwordMatch == true) return userFounded;
-              else throw new Error("Invalid Credentials");
+              if (passwordMatch === true) {
+                userFounded.password = "";
+                //console.log(userFounded);
+                return userFounded;
+              } else throw new Error("Invalid Credentials");
             } else throw new Error("Invalid Credentials");
           },
         }),
@@ -93,7 +95,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
-}
+};
 
 const handler = NextAuth(authOptions);
 

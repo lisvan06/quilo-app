@@ -21,7 +21,7 @@ export default function ProfileForm() {
     });
   }
 
-  if (status == "authenticated") {
+  if (status === "authenticated") {
     const handleClick = async (e) => {
       e.preventDefault();
       const form = e.currentTarget;
@@ -34,7 +34,7 @@ export default function ProfileForm() {
         const newU = new UserService();
         const editedUser = await newU.updateUser(data, data.ownerId);
 
-        if (editedUser) {
+        if (editedUser) {          
           setError("");
           setNotice("Data Saved");
 

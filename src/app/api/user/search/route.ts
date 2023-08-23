@@ -9,7 +9,6 @@ export async function GET(req: NextRequest) {
   const enterprise = searchParams.get("enterprise");
   const address = searchParams.get("address");
   const phone = searchParams.get("phone");
-  const ownerId = searchParams.get("ownerId");
 
   if (username) return await searchByKey("username", username);
 
