@@ -11,7 +11,7 @@ const ShowProduct = ({products, name}) => {
       <>
         {data.map((element) => (
           <tr key={element.id}>
-            {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            {/* <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
               <div className="flex items-center">
                 <div className="flex-shrink-0 w-10 h-10">
                   
@@ -19,7 +19,7 @@ const ShowProduct = ({products, name}) => {
                 </div>
               </div>
             </td> */}
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
             <Link
                 href={`/dashboard/user/${user.id}`}
                 className="inline-flex items-center px-5 py-2 text-sm font-medium text-center text-white"
@@ -28,27 +28,27 @@ const ShowProduct = ({products, name}) => {
               </p></Link>
               
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
               <p className="text-gray-900 whitespace-no-wrap">
                 {element.title}
               </p>
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
               <p className="text-gray-900 whitespace-no-wrap">
                 {element.description}
               </p>
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
               <p className="text-gray-900 whitespace-no-wrap">
                 {element.price}
               </p>
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm">
+            <td className="px-5 py-2 border-b border-gray-200 bg-white text-center text-sm">
               <p className="text-gray-900 whitespace-no-wrap">
                 {element.stock}
               </p>
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm">
+            <td className="px-5 py-2 border-b border-gray-200 bg-white text-center text-sm">
               {element.published ? (
                 <span className="relative inline-block py-1 font-semibold text-green-900 leading-tight">
                   <span
@@ -67,10 +67,10 @@ const ShowProduct = ({products, name}) => {
                 </span>
               )}
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+            <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm text-center">
               <BtnEdit id={element.id} route={"products"} />
             </td>
-            <td className="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <td className="text-center px-5 py-2 border-b border-gray-200 bg-white text-sm">
               <BtnDelete id={element.id} name={"product"}/>
             </td>
           </tr>
