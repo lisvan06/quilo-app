@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth]/route.js", "src/app/lib/prisma/_base.ts", "src/app/components/client/addProductForm.jsx", "src/app/components/client/btnDeleteProduct.jsx", "src/app/components/server/showProduct.jsx", "src/app/dashboard/products/add/page.jsx", "src/app/dashboard/products/edit/[id]/route.jsx", "src/app/dashboard/products/page.jsx", "src/app/components/server/profileForm.jsx", "src/app/dashboard/user/[id]/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth]/route.js", "src/app/lib/prisma/_base.ts", "src/app/components/client/addProductForm.jsx", "src/app/components/client/btnDelete.jsx", "src/app/components/server/showProduct.jsx", "src/app/dashboard/products/add/page.jsx", "src/app/dashboard/products/edit/[id]/route.jsx", "src/app/dashboard/products/page.jsx", "src/app/components/server/profileForm.jsx", "src/app/dashboard/user/[id]/page.jsx"],
   "exclude": ["node_modules"]
 }

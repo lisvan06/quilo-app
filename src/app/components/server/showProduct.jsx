@@ -1,7 +1,8 @@
 import Link from "next/link";
-import BtnDelete from "../client/btnDeleteProduct";
+import BtnDelete from "../client/btnDelete";
+import BtnEdit from "../client/btnEdit";
 
-const ShowProduct = ({products}) => {
+const ShowProduct = ({products, name}) => {
   const data = products.products;
   const user = products;
   // console.log("Username... ", products.username);
@@ -42,12 +43,12 @@ const ShowProduct = ({products}) => {
                 {element.price}
               </p>
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm">
               <p className="text-gray-900 whitespace-no-wrap">
                 {element.stock}
               </p>
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm">
               {element.published ? (
                 <span className="relative inline-block py-1 font-semibold text-green-900 leading-tight">
                   <span
@@ -66,29 +67,11 @@ const ShowProduct = ({products}) => {
                 </span>
               )}
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <Link
-                href={`/dashboard/products/edit/${element.id}`}
-                className="inline-flex items-center px-5 py-2 text-sm font-medium text-center text-white bg-violet-400 rounded-lg hover:bg-violet-600 focus:ring-4 focus:outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                  />
-                </svg>
-              </Link>
+            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+              <BtnEdit id={element.id} route={"products"} />
             </td>
-            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <BtnDelete id={element.id} />
+            <td className="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
+              <BtnDelete id={element.id} name={"product"}/>
             </td>
           </tr>
         ))}

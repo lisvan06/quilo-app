@@ -35,7 +35,7 @@ export default function NavigationBar() {
     {
       id: "menuCategories",
       name: "Categories",
-      href: "/dashboard/category",
+      href: "/dashboard/categories",
     },
     {
       id: "menuLogout",
@@ -98,8 +98,8 @@ export default function NavigationBar() {
     {
       name: "Categories",
       id: "navcategories",
-      href: "/dashboard/category",
-      current: pathname == "/dashboard/category" ? true : false,
+      href: "/dashboard/categories",
+      current: pathname == "/dashboard/categories" ? true : false,
       authenticated: true,
     },
     // {
@@ -196,7 +196,7 @@ export default function NavigationBar() {
                   <>
                     <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2  focus:ring-offset-gray-800">
+                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
                           <span className="text-xs m-2">
