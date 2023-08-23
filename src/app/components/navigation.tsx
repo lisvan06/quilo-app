@@ -17,12 +17,13 @@ export default function NavigationBar() {
   const pathname = usePathname();
   let auth = status === "authenticated" ? true : false;
 
-  const userMenu = [    
+  const userMenu = [
     {
       id: "menuDashBoard",
       name: "Dashboard",
       href: "/dashboard",
-    },{      
+    },
+    {
       id: "menuProfile",
       name: "Profile",
       href: "/dashboard/profile",
@@ -41,7 +42,7 @@ export default function NavigationBar() {
       id: "menuLogout",
       name: "Logout",
       href: "/api/auth/signout",
-    }
+    },
   ];
 
   const navigation = [
@@ -112,7 +113,7 @@ export default function NavigationBar() {
   ];
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="dark:bg-gray-800">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -143,9 +144,9 @@ export default function NavigationBar() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
+                              ? "dark:bg-gray-500 text-white dark:text-white"
+                              : "text-gray-800 hover:bg-gray-600 hover:text-white",
+                              "rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -158,9 +159,9 @@ export default function NavigationBar() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
+                              ? "bg-gray-500 text-white hover:bg-gray-600 dark:text-white "
+                              : "text-gray-800 hover:bg-gray-600 hover:text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-white "
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -178,7 +179,12 @@ export default function NavigationBar() {
                       <div className="flex flex-1 items-center mr-3">
                         <a
                           href="/login"
-                          className="hover:bg-gray-900 text-white  bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                          className={(pathname === "/login") ? (
+                            "bg-gray-500 text-white hover:bg-gray-600 hover:text-white rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-white"
+                          ):(
+                            "text-gray-800 hover:bg-gray-600 hover:text-white rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-white "
+                          ) }
+                          
                         >
                           Log In
                         </a>
@@ -186,7 +192,11 @@ export default function NavigationBar() {
 
                       <a
                         href="/register"
-                        className="hover:bg-gray-900 text-white  bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        className={(pathname === "/register") ? (
+                          "bg-gray-500 text-white hover:bg-gray-600 hover:text-white rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-white"
+                        ):(
+                          "text-gray-800 hover:bg-gray-600 hover:text-white rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-white "
+                        ) }
                       >
                         Register
                       </a>
@@ -219,26 +229,23 @@ export default function NavigationBar() {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700">
-                        {userMenu.map((item)=> 
-
-                            (
-                              <Menu.Item key={item.id+1}>
-                            {({ active }) => (
-                              <a
-                                id={item.id}
-                                key={item.id}
-                                href={item.href}
-                                className={classNames(
-                                  active ? "" : "",
-                                  "block px-4 py-2 text-sm text-gray-700 dark:text-white dark:hover:bg-gray-900"
-                                )}
-                              >
-                                {item.name}
-                              </a>
-                            )}                         
-                          </Menu.Item>
-                            )
-                        )}
+                          {userMenu.map((item) => (
+                            <Menu.Item key={item.id + 1}>
+                              {({ active }) => (
+                                <a
+                                  id={item.id}
+                                  key={item.id}
+                                  href={item.href}
+                                  className={classNames(
+                                    active ? "" : "",
+                                    "block px-4 py-2 text-sm text-gray-700 dark:text-white dark:hover:bg-gray-900"
+                                  )}
+                                >
+                                  {item.name}
+                                </a>
+                              )}
+                            </Menu.Item>
+                          ))}
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -254,7 +261,7 @@ export default function NavigationBar() {
                 auth ? (
                   <Disclosure.Button
                     as="a"
-                    id={item.id}                    
+                    id={item.id}
                     key={item.id}
                     href={item.href}
                     className={classNames(
@@ -268,9 +275,9 @@ export default function NavigationBar() {
                     {item.name}
                   </Disclosure.Button>
                 ) : !item.authenticated ? (
-                  <Disclosure.Button  
+                  <Disclosure.Button
                     as="a"
-                    id={item.id}                
+                    id={item.id}
                     key={item.id}
                     href={item.href}
                     className={classNames(

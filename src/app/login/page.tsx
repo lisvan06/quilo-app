@@ -38,10 +38,10 @@ export default function LoginPage() {
       <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col bg-[url('/tiendaonline-65.jpg')] bg-fixed bg-left-top bg-cover">       
         {error && <p className="text-red-500 text-lg mb-2">{error}</p>}
   
-        <h1 className="text-4xl font-bold mb-2">Login</h1>
-        <p className="text-lg mb-2">
+        <h1 className="text-4xl font-bold mb-2 text-white">Login</h1>
+        <p className="text-lg mb-2 text-white">
           Don't have an account?{" "}
-          <a href="/register" className="text-indigo-500">
+          <a href="/register" className="text-cyan-400 dark:text-cyan-400">
             Register
           </a>
         </p>
@@ -51,14 +51,14 @@ export default function LoginPage() {
             type="email"
             name="email"
             placeholder="johndoe@gmail.com"
-            className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
+            className="bg-zinc-100 text-gray-600 dark:bg-zinc-800 dark:text-white px-4 py-2 block mb-2 rounded-md"
           />
           <input
             type="password"
             name="password"
             minLength={6}
             placeholder="******"
-            className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
+            className="bg-zinc-100 text-gray-600 dark:bg-zinc-800 dark:text-white px-4 py-2 block mb-2 rounded-md"
           />
           <div className="flex place-content-center">
             <button className="bg-indigo-500 px-6 py-2 mt-2 rounded-md text-white hover:bg-indigo-600 transition-colors">

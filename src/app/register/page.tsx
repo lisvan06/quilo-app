@@ -52,10 +52,10 @@ export default function RegisterPage() {
       
       {error && <p className="text-red-500 text-lg mb-2">{error}</p>}
 
-      <h1 className="text-4xl font-bold mb-2">Register</h1>
-      <p className="text-lg mb-2">
+      <h1 className="text-4xl font-bold mb-2 text-white">Register</h1>
+      <p className="text-white text-lg mb-2">
         Already have an account?{" "}
-        <a href="/login" className="text-cyan-400">
+        <a href="/login" className="text-cyan-400 dark:text-cyan-400">
           Login
         </a>
       </p>
@@ -65,14 +65,14 @@ export default function RegisterPage() {
           type="text"
           name="username"
           placeholder="john"
-          className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
+          className="bg-zinc-100 text-gray-600 dark:bg-zinc-800 dark:text-white px-4 py-2 block mb-2 rounded-md"
           required
         />
         <input
           type="email"
           name="email"
           placeholder="johndoe@gmail.com"
-          className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
+          className="bg-zinc-100 text-gray-600 dark:bg-zinc-800 dark:text-white px-4 py-2 block mb-2 rounded-md"
           required
         />
         <input
@@ -80,7 +80,7 @@ export default function RegisterPage() {
           name="password"
           minLength={6}
           placeholder="*****"
-          className="bg-zinc-800 px-4 py-2 block mb-2 rounded-md"
+          className="bg-zinc-100 text-gray-600 dark:bg-zinc-800 dark:text-white px-4 py-2 block mb-2 rounded-md"
           required
         />
         <div className="flex place-content-center">
