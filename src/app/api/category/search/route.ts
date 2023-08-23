@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     const data = await searchByKey("name", name);
     return NextResponse.json(data, { status: 200 });
   }
-  return NextResponse.json({"error", "No params founded"}, { status: 200 });
+  return NextResponse.json({"error": "No params founded"}, { status: 200 });
   //make a switch case for all the search params
 }
 
