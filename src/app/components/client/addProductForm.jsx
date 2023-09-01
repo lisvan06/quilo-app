@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 import { Button, Checkbox, Form, Input } from "antd";
 
 import { ComboCategory } from "@/app/components/server/comboCategory";
-import BtnCancel from "@/app/components/client/BtnCancel";
 
 const AddProductForm = ({ formValues, categories, myAction, id }) => {
   const { data: session, status } = useSession();
