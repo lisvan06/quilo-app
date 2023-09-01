@@ -1,22 +1,30 @@
 "use client";
 
 import axios, { AxiosError } from "axios";
-import { FormEvent, useState } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
+import { Button, Form, Input, message } from "antd";
+import { MailOutlined, UserOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 export default function RegisterPage() {
-  const [error, setError] = useState();
+  const { data: session, status, update } = useSession();
   const router = useRouter();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [form] = Form.useForm();
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  // console.log("User.. ", session?.user);
 
-    const data = new FormData(event.currentTarget);
-    const username = data.get("username");
-    const email = data.get("email");
-    const password = data.get("password");
+  let auth = status === "unauthenticated" && !session ? false : true;
 
+  const handleSubmit = async (fieldsValue: any) => {
+    const values = await form.validateFields();
+
+    // console.log("Success:", values);
+
+    const email = values.email as string;
+    const password = values.password as string;
+    const username = values.username as string;
     try {
       const signUpResponse = await axios.post("/api/auth/signup", {
         username,
@@ -29,67 +37,111 @@ export default function RegisterPage() {
         const res = await signIn("credentials", {
           //Sign in the user
           email: email,
-          password: password as string,
+          password: password,
           redirect: false,
         });
 
         if (res?.ok) {
           //If sign in was successful
           // redirect("/dashboard/profile");
-          router.refresh();
+          //router.refresh();
           return router.push("/dashboard/profile");
-        }
+        } else return;
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        setError(error.response?.data.message);
+        console.log(error);
+        messageApi.open({
+          type: "error",
+          content: error.response?.data.message,
+          style: {
+            marginTop: "10vh",
+            marginLeft: "auto",
+          },
+        });
       }
     }
   };
 
-  return (
-    <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col bg-[url('/tiendaonline-65.jpg')] bg-fixed bg-left-top bg-cover">
-      {error && <p className="text-red-500 text-lg mb-2">{error}</p>}
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 8 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 },
+    },
+  };
 
-      <h1 className="text-4xl font-bold mb-2 text-white">Register</h1>
-      <p className="text-white text-lg mb-2">
-        Already have an account?{" "}
-        <a href="/login" className="text-cyan-400 dark:text-cyan-400">
-          Login
-        </a>
-      </p>
-      <hr className="mb-4" />
-      <form onSubmit={handleSubmit}>
-        <div className="dark:bg-gray-900 p-4 mb-6 rounded-md">
-          <input
-            type="text"
-            name="username"
-            placeholder="john"
-            className="bg-zinc-100 text-gray-600 dark:bg-zinc-600 dark:text-white px-4 py-2 block mb-2 rounded-md"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="johndoe@gmail.com"
-            className="bg-zinc-100 text-gray-600 dark:bg-zinc-600 dark:text-white px-4 py-2 block mb-2 rounded-md"
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            minLength={6}
-            placeholder="*****"
-            className="bg-zinc-100 text-gray-600 dark:bg-zinc-600 dark:text-white px-4 py-2 mb-2 block rounded-md"
-            required
-          />
-          <div className="flex place-content-center">
-          <button className="bg-indigo-500 px-6 py-2 mt-2 rounded-md text-white hover:bg-indigo-600 transition-colors">
-            Register
-          </button>
+  return (
+    <>
+      {contextHolder}
+      <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col bg-[url('/tiendaonline-65.jpg')] bg-fixed bg-left-top bg-cover">
+        <h1 className="text-4xl font-bold mb-2 text-white">Register</h1>
+        <p className="text-white text-lg mb-2">
+          Already have an account?{" "}
+          <Link href="/login" className="text-cyan-400 dark:text-cyan-400">
+            Login
+          </Link>
+        </p>
+        <hr className="mb-4" />
+        <div className="flex flex-col itms-center">
+          <Form
+            name="time_related_controls"
+            onFinish={handleSubmit}
+            form={form}
+            style={{
+              borderRadius: 10,
+              width: 250,
+              clear: "both",
+              backgroundColor: "white",
+              border: "1px solid #ccc",
+              padding: "1rem",
+              display: "flex-col",
+              justifyContent: "center",
+            }}
+          >
+            <Form.Item
+              name="username"
+              rules={[
+                { required: true, message: "Please input your Username!" },
+              ]}
+            >
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="johndoe"
+              />
+            </Form.Item>
+            <Form.Item
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
+              <Input
+                prefix={<MailOutlined className="site-form-item-icon" />}
+                placeholder="johndoe@gmail.com"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+              hasFeedback
+            >
+              <Input.Password placeholder="******" />
+            </Form.Item>
+            <div className="flex place-content-center">
+              <Button type="primary" htmlType="submit" className="my-button">
+                Register
+              </Button>
+            </div>
+          </Form>
         </div>
-        </div>
-      </form>
-    </div>
+      </div>
+    </>
   );
 }

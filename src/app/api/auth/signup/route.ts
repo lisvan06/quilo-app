@@ -15,6 +15,7 @@ export async function GET() {
 export async function POST(request: Request) {
   const { username, email, password } = await request.json();
 
+  console.log(username);
   if (!email || !email.includes("@"))
     return NextResponse.json({ message: "Invalid email" }, { status: 400 });
 

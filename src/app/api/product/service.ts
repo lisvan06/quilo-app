@@ -3,6 +3,19 @@ import { NextRequest, NextResponse, userAgent } from "next/server";
 import axios, { AxiosError } from "axios";
 
 export default class ProductService {
+  async setPublised(product: any) {
+
+    try {
+      const res = await axios.put(
+        `/api/product/${product.id}`,
+        product
+      );
+      return res;
+    } catch (error) {
+      return false;
+    }
+  }
+
   async getAllProducts<PrismaClient>() {
     try {
       const products = await axios.get(
@@ -14,7 +27,7 @@ export default class ProductService {
     }
   }
 
-  async getProductById<PrismaClient>(id: string){
+  async getProductById<PrismaClient>(id: string) {
     try {
       const products = await axios.get(
         process.env.NEXTAUTH_URL + "/api/product/" + id

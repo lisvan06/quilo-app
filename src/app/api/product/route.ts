@@ -13,7 +13,7 @@ export async function GET() {
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const requestBody = await req.json();
-    console.log(requestBody);
+    console.log("RequestBody ", requestBody);
     if (!requestBody)
       return NextResponse.json({ data: "No body provided" }, { status: 400 });
     const price = parseFloat(requestBody.price);

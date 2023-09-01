@@ -23,7 +23,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const requestBody = await req.json();
-
+  console.log(requestBody);
   try {
     const price = parseFloat(requestBody.price);
     requestBody.price = price;

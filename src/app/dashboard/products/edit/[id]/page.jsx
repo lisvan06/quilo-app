@@ -35,7 +35,7 @@ const Edit = async ({ params }) => {
 
     return (
       <>
-        <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col ">
+        <div className="flex flex-col sm:py-3 dark:to-zinc-600 bg-[url('/waves-background.svg')] bg-fixed bg-left-top bg-cover 2xl:h-[calc(100vh-4rem)] items-center p-8 w-full sm:h-[calc(100vh-1rem)]">
           <div className="justify-center text-center">
             <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
               Edit Product

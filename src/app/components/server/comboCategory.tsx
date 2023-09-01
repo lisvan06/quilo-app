@@ -1,5 +1,5 @@
-import { handleClientScriptLoad } from "next/script";
 import { useId } from "react";
+import { Select, Space } from 'antd';
 
 export type Categories = {
   id: string;
@@ -8,46 +8,50 @@ export type Categories = {
 
 export type SelectProps = {
   label: String;
-  value: String;
+  name: String;
   categories: Categories[];
   defaultValue: string;
   childToParent: Function;
-  onChange: (id: string) => void;
-  options: { id: String; title: string }[];
+  value: "name";
+  onChange: (e: any) => string;
+  options: { id: String; name: string }[];
 };
 
 function childToParent (e: any) {
   return e;
+  console.log(e);
 };
 
 export const ComboCategory = ({
-  label,
+  label,  
   categories,
   childToParent
-}: SelectProps) => {
-  const cat = categories;
+}: any) => {
+  const handleChange = (value: { value: string; label: React.ReactNode }) => {
+    childToParent(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
+  };
+  
 
+  const cat = categories;
+ 
   const id = useId();
   return (
     <>
       <label htmlFor="{id}">{label}</label>
-      <select
-        name="categoryId"
-        id="comboProdCat"        
-        onChange={childToParent as any}
-        className="border border-slate-500 px-8 py-2 mx-0 dark:text-zinc-600 rounded-md"       
+      <Select
+        id="comboProdCat"
+        key="categoryId"
+        //defaultValue={"Select a category"}       
+        onChange={handleChange}
+        options={cat.map((item: any) => ({
+          value: item.id,
+          label: item.name,
+          key: item.id
+        }))}
       >
-        <option value="select">-- Select a Category --</option>
-        {Array.isArray(cat) ? (
-          cat.map((item: Categories) => (
-            <option id={item.id} value={item.id} key={item.id}>
-              {item.name}
-            </option>
-          ))
-        ) : (
-          <></>
-        )}
-      </select>
+        
+        
+      </Select>
     </>
   );
 };

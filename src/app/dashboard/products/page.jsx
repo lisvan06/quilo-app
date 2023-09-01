@@ -1,8 +1,8 @@
-
 import TableProducts from "@/app/components/client/tableProducts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ProductService from "@/app/api/product/service";
+import { ConfigProvider } from "antd";
 
 export default async function productsPage() {
   async function getData(user) {
@@ -11,7 +11,7 @@ export default async function productsPage() {
       //role = "ADMIN";
       const newP = new ProductService();
 
-      const res = 
+      const res =
         role === "USER"
           ? await newP.getProductsByOwnerId(user.id)
           : await newP.getAllProducts();

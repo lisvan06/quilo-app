@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Button, Checkbox, Form, Input } from "antd";
 
 const AddCategoryForm = ({ formValues, myAction, id }) => {
   const { data: session, status } = useSession();
@@ -89,29 +90,22 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 dark:text-zinc-600 rounded-md"
+      className="flex flex-col gap-3 w-[300px] dark:text-zinc-600 rounded-md"
     >
       
-      <input
-        className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
-        type="text"
+      <Input
+        style={{ width: '100%' }}
         placeholder="Descripcion"
         name="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
       />
-      <div className="justify-end">
-        <button className="float-right bg-indigo-500 hover:bg-indigo-700 text-white font-bold p-3 pl-6 ml-2 rounded-md w-1/3">
-          Save
-        </button>
-        <button
-          onClick={btnBack}
-          type="button"
-          className=" float-right bg-gray-400 hover:bg-gray-600 text-white font-bold p-3 px-6 rounded-md w-1/3"
-        >
+      <div className="flex justify-end">        
+        <Button type="primary" htmlType="submit" className="mr-2">Save</Button>        
+        <Button danger type="primary" onClick={() => {router.back();}}>
           Cancel
-        </button>
+        </Button>
       </div>
     </form>
   );

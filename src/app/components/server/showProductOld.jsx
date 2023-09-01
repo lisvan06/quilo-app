@@ -3,7 +3,7 @@ import BtnDelete from "../client/btnDelete";
 import BtnEdit from "../client/btnEdit";
 import BtnPublish from "@/app/components/client/btnPublish";
 
-const ShowProduct = ({products, name}) => {
+const ShowProductOld = ({products, name}) => {
   // console.log(products);
   const data = products.products;
   const user = products;

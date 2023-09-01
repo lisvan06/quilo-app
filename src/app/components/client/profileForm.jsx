@@ -1,12 +1,27 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import UserService from "@/app/api/user/service";
+import { Button, Form, Input, message } from "antd";
 
 export default function ProfileForm() {
   const { data: session, status, update } = useSession();
-  const [error, setError] = useState("");
-  const [notice, setNotice] = useState("");
+  const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [address, setAddress] = useState("");
+  const [enterprise, setEnterprise] = useState("");
+
+  useEffect(() => {
+    if (session?.user) {
+      // console.log(formValues);
+      // setAddress(session?.user?.address);
+      // setEnterprise(session?.user?.enterprise);
+      form.setFieldsValue({
+        enterprise: session?.user?.enterprise,
+        address: session?.user?.address,
+      });
+    }
+  }, []);
 
   const router = useRouter();
 
@@ -22,70 +37,78 @@ export default function ProfileForm() {
   }
 
   if (status === "authenticated") {
-    const handleClick = async (e) => {
-      e.preventDefault();
-      const form = e.currentTarget;
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData);
-
-      data.ownerId = session?.user?.id;
-
+    const handleClick = async () => {
       try {
-        const newU = new UserService();
-        const editedUser = await newU.updateUser(data, data.ownerId);
+        const values = await form.validateFields();
+        values.ownerId = session?.user?.id;
+        console.log("Values ", values);
 
-        if (editedUser) {          
-          setError("");
-          setNotice("Data Saved");
+        const newU = new UserService();
+        const editedUser = await newU.updateUser(values, values.ownerId);
+
+        if (editedUser) {
+          // messageApi.open({
+          //   type: "success",
+          //   content: "Data saved",
+          // });
 
           updateSession(editedUser.data.data);
         } else {
-          setError("Error saving data");
+          messageApi.open({
+            type: "error",
+            content: "Error saving data",
+          });
         }
       } catch (error) {
         console.log("error in request", error);
-        setError("Error saving data");
+        messageApi.open({
+          type: "error",
+          content: "Error saving data",
+        });
       }
     };
 
     return (
       <>
-        <form
+        <Form
+          form={form}
           id="profileForm"
           method="post"
-          onSubmit={handleClick}
-          className="bg-white dark:bg-gray-900 p-4 rounded-md flex flex-col justify-center w-auto items-center"
+          style={{
+            borderRadius: 10,
+            clear: "both",
+            padding: "1rem",
+            display: "flex-col",
+            justifyContent: "center",
+          }}
         >
           <input
             type="text"
             name="id"
+            hidden
             placeholder="Some Title"
-            className="bg-zinc-100 dark:bg-zinc-800 px-4 py-2 mb-2 text-white hidden"
             defaultValue={session?.user?.id}
           />
-          <input
-            type="textarea"
+          <Form.Item
             name="enterprise"
-            placeholder="My Enterprise"
-            className="bg-zinc-100 dark:bg-zinc-500 px-4 py-2 block mb-2 rounded-md"
-            required
-            defaultValue={session?.user?.enterprise}
-          />
-          <input
-            type="text"
+            initialValue={session?.user?.enterprise}
+            style={{ marginBottom: "10px" }}
+          >
+            <Input placeholder="Enterprise" />
+          </Form.Item>
+          <Form.Item
             name="address"
-            placeholder="My Address"
-            className="bg-zinc-100 dark:bg-zinc-500 px-4 py-2 block mb-2 rounded-md"
-            required
-            defaultValue={session?.user?.address}
-          />
-          <button className="w-1/2 text-white bg-indigo-500 py-2 px-4 mt-2 rounded-md hover:bg-indigo-600 transition-colors">
+            initialValue={session?.user?.address}
+            style={{ marginBottom: "10px" }}
+          >
+            <Input placeholder="Address" />
+          </Form.Item>
+        </Form>
+        <div className="flex place-content-center mt-0 ">
+          <Button type="primary" className="my-button" onClick={handleClick}>
             Save
-          </button>
-
-          {error && <p className="text-red-500 text-md m-2">{error}</p>}
-          {notice && <p className="text-green-500 text-md m-2">{notice}</p>}
-        </form>
+          </Button>
+        </div>
       </>
     );
   }

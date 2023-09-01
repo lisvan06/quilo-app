@@ -1,8 +1,10 @@
 "use client";
 
-import ShowCategory from "@/app/components/server/showCategory";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
+import ShowCategory from "@/app/components/server/showCategory";
+import BtnAdd from "@/app/components/client/btnAdd";
 
 export default function TableCategories({ data }) {
   //console.log(typeof data);
@@ -15,16 +17,11 @@ export default function TableCategories({ data }) {
 
   return (
     <>
-      <div className=" bg-white p-8 w-full dark:bg-gray-900 ">
+      <div className=" flex flex-col h-[calc(100vh-4rem)] items-center bg-white p-8 w-full dark:bg-gray-900 ">
         <div className="flex flex-col items-center w-full my-2 overflow-x-auto ">
           <div className="">
-            <div className="flex flex-col items-start mb-3">
-              <button
-                className="px-4 py-2 text-white bg-blue-500 rounded-lg"
-                onClick={handleClickAdd}
-              >
-                Add
-              </button>
+            <div className=" flex items-center mb-5">
+              <BtnAdd route={"categories"} text={"Add Category"}></BtnAdd>
             </div>
 
             <div className="inline-block shadow rounded-lg overflow-hidden">

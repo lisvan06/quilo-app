@@ -8,9 +8,8 @@ export default function ProfilePage() {
   const { data: session, status } = useSession();
 
   return (
-    <div className="justify-center h-[calc(100vh-4rem)] items-center flex flex-col-1">
-
-      <div className="flex flex-col bg-white max-w-xs p-6 m-5 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100 ">
+    <div className="flex flex-col overflow-hidden sm:py-3 dark:to-zinc-600 bg-[url('/waves-background.svg')] bg-fixed bg-left-top bg-cover 2xl:h-[calc(100vh-4rem)] items-center p-8 w-full sm:h-[calc(100vh-1rem)]">
+      <div className="flex flex-col bg-white max-w-xs p-6 m-5 shadow-md rounded-xl sm:px-12 ">
         <img
           src="/images.png"
           alt=""
@@ -30,7 +29,7 @@ export default function ProfilePage() {
               rel="noopener noreferrer"
               href="#"
               aria-label="GitHub"
-              className="p-2 rounded-md dark:text-gray-100 hover:dark:text-violet-400"
+              className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-400"
             >
               <svg
                 viewBox="0 0 496 512"
@@ -44,7 +43,7 @@ export default function ProfilePage() {
               rel="noopener noreferrer"
               href="#"
               aria-label="Dribble"
-              className="p-2 rounded-md dark:text-gray-100 hover:dark:text-violet-400"
+              className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-400"
             >
               <svg
                 viewBox="0 0 512 512"
@@ -58,7 +57,7 @@ export default function ProfilePage() {
               rel="noopener noreferrer"
               href="#"
               aria-label="Twitter"
-              className="p-2 rounded-md dark:text-gray-100 hover:dark:text-violet-400"
+              className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-400"
             >
               <svg
                 viewBox="0 0 512 512"
@@ -72,7 +71,7 @@ export default function ProfilePage() {
               rel="noopener noreferrer"
               href="#"
               aria-label="Email"
-              className="p-2 rounded-md dark:text-gray-100 hover:dark:text-violet-400"
+              className="p-2 rounded-md dark:text-gray-800 hover:dark:text-violet-400"
             >
               <svg
                 viewBox="0 0 512 512"
@@ -86,7 +85,6 @@ export default function ProfilePage() {
         </div>
         <ProfileForm></ProfileForm>
       </div>
-      <hr className="mb-4" />
     </div>
   );
 }
