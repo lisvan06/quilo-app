@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import BtnAdd from "@/app/components/client/btnAdd";
 import CardProduct from "./cardProduct";
 import Search from "antd/es/input/Search";
+import { Pagination } from "antd";
 
 export default function TableProducts({ products }) {
   const { data: session, status } = useSession();
@@ -24,7 +25,7 @@ export default function TableProducts({ products }) {
 
   return (
     <>
-      <div className="relative isolate overflow-hidden sm:py-4 bg-[url('/waves-background.svg')] bg-fixed bg-left-top bg-cover 2xl:h-[calc(100vh-4rem)] items-center p-3 w-full sm:h-[calc(100vh-1rem)]">
+      <div className="sm:py-4 bg-[url('/waves-background.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full">
         <div className=" flex justify-center mb-10 w-full">
           <BtnAdd route={"products"} text={"Add"}></BtnAdd>
           <Search
@@ -34,15 +35,20 @@ export default function TableProducts({ products }) {
             style={{ margin: "0.5rem", width: "20rem" }}
           />
         </div>
-        <div className="flex flex-col w-full justify-center sm:flex-row sm:flex-wrap overflow-y-auto">
-        {(Array.isArray(product)) ? 
-          product.map((element) => (
-          <CardProduct key={element.id} product={element}></CardProduct>
-        )) : (<></>)}
-          
+        <div className="flex flex-col w-full justify-center items-center sm:flex-row sm:flex-wrap">
+          {Array.isArray(product) ? (
+            product.map((element) => (
+              <CardProduct key={element.id} product={element}></CardProduct>
+            ))
+          ) : (
+            <></>
+          )}
         </div>
+        <div className="h-9 flex justify-center w-full mb-5">
+        <Pagination defaultCurrent={1} total={40}></Pagination>{" "}
       </div>
-        <div className="h-9">sdsd   </div>
+      </div>
+      
     </>
   );
 }

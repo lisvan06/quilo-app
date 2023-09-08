@@ -62,13 +62,19 @@ export default function RootLayout({
                 <Content
                   style={{
                     margin: "0px",
-                    // minHeight: 280,
                     background: colorBgContainer,
                   }}
                 >
                   {children}
                 </Content>
-                <Footer style={{ textAlign: 'center', position: "fixed", bottom: 0, width: '100%' }}>Al Quilo ©2023 Created by Lisvan</Footer>
+                <Footer
+                  style={{
+                    textAlign: "center",
+                    width: "100%",
+                  }}
+                >
+                  Al Quilo ©2023 By Lisvan
+                </Footer>
               </Layout>
             </Layout>
           </ConfigProvider>

@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { Select, Space } from 'antd';
+import { Select, Space } from "antd";
 
 export type Categories = {
   id: string;
@@ -17,23 +17,18 @@ export type SelectProps = {
   options: { id: String; name: string }[];
 };
 
-function childToParent (e: any) {
+function childToParent(e: any) {
   return e;
   console.log(e);
-};
+}
 
-export const ComboCategory = ({
-  label,  
-  categories,
-  childToParent
-}: any) => {
+export const ComboCategory = ({ label, categories, childToParent }: any) => {
   const handleChange = (value: { value: string; label: React.ReactNode }) => {
     childToParent(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
   };
-  
 
   const cat = categories;
- 
+
   const id = useId();
   return (
     <>
@@ -41,17 +36,14 @@ export const ComboCategory = ({
       <Select
         id="comboProdCat"
         key="categoryId"
-        //defaultValue={"Select a category"}       
+        //defaultValue={"Select a category"}
         onChange={handleChange}
         options={cat.map((item: any) => ({
           value: item.id,
           label: item.name,
-          key: item.id
+          key: item.id,
         }))}
-      >
-        
-        
-      </Select>
+      ></Select>
     </>
   );
 };

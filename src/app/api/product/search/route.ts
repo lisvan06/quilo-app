@@ -64,5 +64,18 @@ async function searchByKey(key: string, value: any) {
     }
   });
 
+  // const results = await prisma.product.findMany({
+  //   skip: page*10,
+  //   take: 10,
+  //   where: {
+  //     description: {
+  //       contains: descript,
+  //     },
+  //   },
+  //   orderBy: {
+  //     title: 'desc',
+  //   },
+  // })
+
   return NextResponse.json({ data: data }, { status: 200 });
 }

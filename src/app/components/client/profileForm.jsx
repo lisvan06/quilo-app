@@ -77,7 +77,7 @@ export default function ProfileForm() {
           style={{
             borderRadius: 10,
             clear: "both",
-            padding: "1rem",
+            padding: "0.5rem",
             display: "flex-col",
             justifyContent: "center",
           }}
@@ -92,20 +92,20 @@ export default function ProfileForm() {
           <Form.Item
             name="enterprise"
             initialValue={session?.user?.enterprise}
-            style={{ marginBottom: "10px" }}
+            style={{ marginBottom: "5px" }}
           >
             <Input placeholder="Enterprise" />
           </Form.Item>
           <Form.Item
             name="address"
             initialValue={session?.user?.address}
-            style={{ marginBottom: "10px" }}
+            style={{ marginBottom: "5px" }}
           >
             <Input placeholder="Address" />
           </Form.Item>
         </Form>
         <div className="flex place-content-center mt-0 ">
-          <Button type="primary" className="my-button" onClick={handleClick}>
+          <Button type="primary" className="m-0" onClick={handleClick}>
             Save
           </Button>
         </div>

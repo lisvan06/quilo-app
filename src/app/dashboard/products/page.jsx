@@ -2,7 +2,7 @@ import TableProducts from "@/app/components/client/tableProducts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ProductService from "@/app/api/product/service";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Pagination } from "antd";
 
 export default async function productsPage() {
   async function getData(user) {
