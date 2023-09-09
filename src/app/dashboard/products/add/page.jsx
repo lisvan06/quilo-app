@@ -14,12 +14,8 @@ const AddProduct = async () => {
     const categories = await catValues();
     return (
       <>
-        <div className="flex flex-col overflow-hidden sm:py-3 dark:to-zinc-600 bg-[url('/waves-background.svg')] bg-fixed bg-left-top bg-cover 2xl:h-[calc(100vh-4rem)] items-center p-8 w-full sm:h-[calc(100vh-1rem)]">
-          <div className="justify-center text-center">
-            <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
-              Add Product
-            </h1>
-          </div>
+        <div className="flex flex-col overflow-hidden sm:py-3 bg-[url('/waves-background1.svg')] bg-fixed bg-left-top bg-cover 2xl:h-[calc(100vh-4rem)] p-8 w-full sm:h-[calc(100vh-128px)]">
+        
           <AddProductForm categories={categories} myAction="create"/>
         </div>
       </>

@@ -6,7 +6,7 @@ const BtnEdit = ({ id, route }) => {
     <>
       <Link
         href={`/dashboard/${route}/edit/${id}`}
-        className="flex flex-col items-center py-2 text-sm font-medium text-center text-green-400 hover:text-green-600  focus:outline-none"
+        className="flex flex-col items-center text-sm font-medium text-center text-green-400 hover:text-green-600  focus:outline-none"
       >
         <EditOutlined style={{fontSize: '20px'}}/>
       </Link>

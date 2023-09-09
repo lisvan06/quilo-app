@@ -2,7 +2,9 @@ import { Menu } from "antd";
 import {
   ExclamationCircleOutlined,
   HomeOutlined,
+  OrderedListOutlined,
   QuestionCircleOutlined,
+  ReconciliationOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 // import { usePathname } from "next/navigation";
@@ -31,6 +33,16 @@ export default function MenuLeft() {
             key: "3",
             icon: <QuestionCircleOutlined />,
             label: <Link href="/help">Help</Link>,
+          },
+          {
+            key: "4",
+            icon: <ReconciliationOutlined />,
+            label: <Link href="/dashboard/products">Products</Link>,
+          },
+          {
+            key: "5",
+            icon: <OrderedListOutlined />,
+            label: <Link href="/dashboard/categories">Categories</Link>,
           },
         ]}
       />

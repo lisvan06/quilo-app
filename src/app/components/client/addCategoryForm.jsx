@@ -3,12 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Breadcrumb, Button, Checkbox, Form, Input } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 
 const AddCategoryForm = ({ formValues, myAction, id }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  
+
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          name
+          name,
         }),
       });
 
@@ -57,9 +58,8 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
     }
   };
 
-  
   const onSubmitEdit = async (formData) => {
-    console.log("Editing...");  
+    console.log("Editing...");
     try {
       const response = await fetch(`/api/category/${id}`, {
         method: "PUT",
@@ -88,26 +88,64 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-3 w-[300px] dark:text-zinc-600 rounded-md"
-    >
-      
-      <Input
-        style={{ width: '100%' }}
-        placeholder="Descripcion"
-        name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
+    <>
+      <Breadcrumb
+        items={[
+          {
+            href: "/",
+            title: <HomeOutlined />,
+          },
+          {
+            href: "/dashboard",
+            title: (
+              <>
+                <span>Dashboard</span>
+              </>
+            ),
+          },
+          {
+            href: "/dashboard/categories",
+            title: (
+              <>
+                <span>Categories</span>
+              </>
+            ),
+          },
+          {
+            title: "Add",
+          },
+        ]}
       />
-      <div className="flex justify-end">        
-        <Button type="primary" htmlType="submit" className="mr-2">Save</Button>        
-        <Button danger type="primary" onClick={() => {router.back();}}>
-          Cancel
-        </Button>
+      <div className="mt-4 flex justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-3 md:w-80 rounded-md"
+        >
+          <Input
+            style={{ width: "100%" }}
+            placeholder="Descripcion"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <div className="flex justify-end">
+            <Button type="primary" htmlType="submit" className="mr-2">
+              Save
+            </Button>
+            <Button
+              danger
+              type="primary"
+              onClick={() => {
+                router.back();
+              }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
       </div>
-    </form>
+    </>
   );
 };
 

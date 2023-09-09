@@ -18,6 +18,6 @@ export default function BtnPublish({product, status}){
       };
 
     return <>
-        <Switch defaultChecked={status} onChange={onChange} size="small" style={{marginTop:"10px" }}/>
+        <Switch defaultChecked={status} onChange={onChange} size="small"/>
     </>
 }

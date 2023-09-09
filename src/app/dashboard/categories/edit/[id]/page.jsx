@@ -23,10 +23,10 @@ const EditCategory = async ({ params }) => {
 
   return (
     <>
-      <div className=" flex flex-col h-[calc(100vh-4rem)] items-center bg-white p-8 w-full dark:bg-gray-900 ">
+      <div className="sm:py-4 bg-[url('/waves-background.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full h-[calc(100vh-128px)]">
         <div className="justify-center text-center">
-          <h1 className="text-4xl font-bold mb-2 dark:text-zinc-400">
-            Edit Product
+          <h1 className="text-4xl font-bold mb-2 text-white">
+            Edit Category
           </h1>
         </div>
         <AddCategoryForm formValues={data} myAction={"edit"} id={params.id} />

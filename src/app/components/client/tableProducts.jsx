@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import BtnAdd from "@/app/components/client/btnAdd";
 import CardProduct from "./cardProduct";
 import Search from "antd/es/input/Search";
-import { Pagination } from "antd";
+import { Breadcrumb, Pagination } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 
 export default function TableProducts({ products }) {
   const { data: session, status } = useSession();
@@ -19,14 +20,37 @@ export default function TableProducts({ products }) {
     router.push("/dashboard/products/add");
   };
 
+  const changePagination = (page) => {
+    console.log(page);
+  };
+
   const onSearch = (value) => {
     console.log(value);
   };
 
   return (
     <>
-      <div className="sm:py-4 bg-[url('/waves-background.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full">
-        <div className=" flex justify-center mb-10 w-full">
+      <div className="sm:py-4 bg-[url('/waves-background1.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full">
+        <Breadcrumb
+          items={[
+            {
+              href: "/",
+              title: <HomeOutlined />,
+            },
+            {
+              href: "/dashboard",
+              title: (
+                <>
+                  <span>Dashboard</span>
+                </>
+              ),
+            },
+            {
+              title: "Products",
+            },
+          ]}
+        />
+        <div className=" flex justify-center w-full">
           <BtnAdd route={"products"} text={"Add"}></BtnAdd>
           <Search
             placeholder="input search text"
@@ -45,10 +69,13 @@ export default function TableProducts({ products }) {
           )}
         </div>
         <div className="h-9 flex justify-center w-full mb-5">
-        <Pagination defaultCurrent={1} total={40}></Pagination>{" "}
+          <Pagination
+            defaultCurrent={1}
+            total={40}
+            onChange={changePagination}
+          ></Pagination>{" "}
+        </div>
       </div>
-      </div>
-      
     </>
   );
 }

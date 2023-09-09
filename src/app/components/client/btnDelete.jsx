@@ -48,7 +48,7 @@ const BtnDelete = ({ id, name }) => {
     <>
       <DeleteOutlined
         onClick={showModal}
-        style={{ marginTop: "8px", color: "red", fontSize: '20px'}}
+        style={{color: "red", fontSize: '20px', marginLeft: "8px"}}
       ></DeleteOutlined>
       <Modal
         title="The element will be deleted"

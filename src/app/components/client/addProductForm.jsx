@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Breadcrumb, Button, Checkbox, Form, Input } from "antd";
 
 import { ComboCategory } from "@/app/components/server/comboCategory";
+import { HomeOutlined } from "@ant-design/icons";
 
 const AddProductForm = ({ formValues, categories, myAction, id }) => {
   const { data: session, status } = useSession();
@@ -52,8 +53,9 @@ const AddProductForm = ({ formValues, categories, myAction, id }) => {
     }
 
     try {
-      const url = (method === "PUT") ? `/api/product/${productId}` :  `/api/product/`;
-      
+      const url =
+        method === "PUT" ? `/api/product/${productId}` : `/api/product/`;
+
       const res = await fetch(url, {
         method: method,
         headers: {
@@ -75,27 +77,6 @@ const AddProductForm = ({ formValues, categories, myAction, id }) => {
     }
   };
 
-  // const onSubmitEdit = async (formData) => {
-  //   console.log("Editing...");
-  //   try {
-  //     const response = await fetch(`/api/product/${id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to update.");
-  //     }
-  //     router.refresh();
-  //     router.push("/dashboard/products");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = { title, description, price, stock, ownerId, categoryId };
@@ -105,73 +86,111 @@ const AddProductForm = ({ formValues, categories, myAction, id }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-3 dark:text-zinc-600 rounded-md"
-    >
-      <input
-        type="text"
-        name="ownerId"
-        placeholder="Owner Id"
-        defaultValue={session?.user.id}
-        onChange={(e) => setOwnerId(session?.user.id)}
-        hidden
-      />
-        
-      <Input
-        maxLength={20}
-        type="text"
-        placeholder="Title"
-        name="title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      {/* <input
-        className="border border-slate-500 px-8 py-2 dark:text-zinc-600 rounded-md"
-        type="text"
-        placeholder="Title"
-        name="title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      /> */}
-      {<ComboCategory categories={categories} childToParent={childToParent} />}
-      <TextArea
-        cols={30}
-        rows={5}
-        minLength={30}
-        type="string"
-        name="description"
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-      />
-      <Input
-        type="number"
-        name="price"
-        step={0.01}
-        placeholder="Price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        required
-      />
-      <Input rules={[{ required: true }]}
-        type="number"
-        name="stock"
-        placeholder="Stock"
-        value={stock}
-        onChange={(e) => setStock(e.target.value)}
-        required
-      />
-      <div className="flex justify-end">        
-        <Button type="primary" htmlType="submit" className="mr-2">Save</Button>        
-        <Button danger type="primary" onClick={() => {router.back();}}>
-          Cancel
-        </Button>
+    <>
+      
+        <Breadcrumb
+          items={[
+            {
+              href: "/",
+              title: <HomeOutlined />,
+            },
+            {
+              href: "/dashboard",
+              title: (
+                <>
+                  <span>Dashboard</span>
+                </>
+              ),
+            },
+            {
+              href: "/dashboard/products",
+              title: (
+                <>
+                  <span>Products</span>
+                </>
+              ),
+            },
+            {
+              title: "Add",
+            },
+          ]}
+        />
+
+      <div className="mt-4 flex justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-3 rounded-md"
+        >
+          <input
+            type="text"
+            name="ownerId"
+            placeholder="Owner Id"
+            defaultValue={session?.user.id}
+            onChange={(e) => setOwnerId(session?.user.id)}
+            hidden
+          />
+
+          <Input
+            maxLength={20}
+            type="text"
+            placeholder="Title"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          {
+            <ComboCategory
+              categories={categories}
+              childToParent={childToParent}
+            />
+          }
+          <TextArea
+            cols={30}
+            rows={5}
+            minLength={30}
+            type="string"
+            name="description"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <Input
+            type="number"
+            name="price"
+            step={0.01}
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+          <Input
+            rules={[{ required: true }]}
+            type="number"
+            name="stock"
+            placeholder="Stock"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+            required
+          />
+          <div className="flex justify-end">
+            <Button type="primary" htmlType="submit" className="mr-2">
+              Save
+            </Button>
+            <Button
+              danger
+              type="primary"
+              onClick={() => {
+                router.back();
+              }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
       </div>
-    </form>
+    </>
   );
 };
 
