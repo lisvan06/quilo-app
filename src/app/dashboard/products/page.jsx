@@ -2,7 +2,6 @@ import TableProducts from "@/app/components/client/tableProducts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ProductService from "@/app/api/product/service";
-import { ConfigProvider, Pagination } from "antd";
 
 export default async function productsPage() {
   async function getData(user) {
@@ -29,7 +28,9 @@ export default async function productsPage() {
     // console.log("Products... ", data);
     return (
       <>
-        <TableProducts products={data}></TableProducts>
+        <div className="sm:py-4 bg-[url('/waves-background1.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full h-[calc(100vh-128px)]">
+          <TableProducts products={data}></TableProducts>
+        </div>
       </>
     );
   } catch (error) {}

@@ -79,6 +79,8 @@ model Product {
   deleted     Boolean   @default(false)
   category    Category? @relation(fields: [categoryId], references: [id])
   categoryId  String    @db.ObjectId
+  image       Image?    @relation(fields: [imageId], references: [id])
+  imageId     String    @db.ObjectId
 
   @@map("products")
 }
@@ -95,6 +97,16 @@ model Category {
 enum Role {
   USER
   ADMIN
+}
+
+model Image {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  publicId String    @unique
+  format   String
+  version  String
+  Product  Product[]
+
+  @@map("images")
 }
 
 // type Address {

@@ -15,25 +15,26 @@ export default function CardProduct(product: any) {
   return (
     <>
       <Card
+        onClick={() => {
+          console.log(item.id);
+        }}
+        hoverable
         style={{
           width: "16rem",
           margin: "0.8rem",
           boxShadow:
             "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19)",
         }}
+        cover={<img alt="example" src="/detergente.jpg" />}
         actions={[
           <BtnPublish product={item} status="checked"></BtnPublish>,
           <BtnEdit id={item.id} route={`products`}></BtnEdit>,
           <BtnDelete id={item.id} name={"product"}></BtnDelete>,
         ]}
       >
-        <Meta
-          avatar={<Avatar src="/images.png" size={42}/> }
-          title={item.title}
-          description={`Price: $ ${item.price} -- Stock: ${item.stock} `}
-        />
+        <Meta title={item.title} description={`$ ${item.price}`} />
         <div className="mt-0.5 text-gray-400 text-sm p-0">
-          <p className="text-justify">{item.description}</p>
+          <p className="text-justify">{item.description.substring(0, 30)}...</p>
         </div>
       </Card>
     </>

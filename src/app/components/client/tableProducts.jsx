@@ -30,7 +30,7 @@ export default function TableProducts({ products }) {
 
   return (
     <>
-      <div className="sm:py-4 bg-[url('/waves-background1.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full">
+      <div>
         <Breadcrumb
           items={[
             {
@@ -71,7 +71,7 @@ export default function TableProducts({ products }) {
         <div className="h-9 flex justify-center w-full mb-5">
           <Pagination
             defaultCurrent={1}
-            total={40}
+            total={products.total}
             onChange={changePagination}
           ></Pagination>{" "}
         </div>

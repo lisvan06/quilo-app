@@ -7,15 +7,12 @@ import {
   ReconciliationOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-// import { usePathname } from "next/navigation";
-// import { useSession } from "next-auth/react";
-
 
 export default function MenuLeft() {
   return (
     <>
       <Menu
-        theme="dark"
+        // theme="light"
         mode="inline"
         defaultSelectedKeys={["1"]}
         items={[
