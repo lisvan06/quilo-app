@@ -8,7 +8,7 @@ export default function BtnAdd({ route, text }) {
   };
   return (
     <>
-      <Button type="primary" className="my-button" onClick={handleClickAdd} style={{margin: '0.5rem'}}>{text}</Button>
+      <Button type="primary" className="my-button" onClick={handleClickAdd}>{text}</Button>
     </>
   );
 }

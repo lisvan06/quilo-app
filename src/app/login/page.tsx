@@ -57,9 +57,9 @@ export default function LoginPage() {
   return (
     <>
       {contextHolder}
-      <div className=" h-[calc(100vh-4rem)] items-center flex flex-col bg-[url('/tiendaonline-65.jpg')] bg-fixed bg-left-top bg-cover">
-        <h1 className="text-4xl font-bold mb-2 text-white mt-28">Login</h1>
-        <p className="text-lg mb-2 text-white">
+      <div className="items-center flex flex-col">
+        <h1 className="text-4xl font-bold mb-2 text-gray-700 mt-28">Login</h1>
+        <p className="text-lg mb-2 text-gray-600">
           Don't have an account?{" "}
           <Link href="/register" className="text-cyan-400 dark:text-cyan-400">
             Register

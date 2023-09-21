@@ -30,35 +30,16 @@ export default function TableProducts({ products }) {
   return (
     <>
       <div>
-        <Breadcrumb
-          items={[
-            {
-              href: "/",
-              title: <HomeOutlined />,
-            },
-            {
-              href: "/dashboard",
-              title: (
-                <>
-                  <span>Dashboard</span>
-                </>
-              ),
-            },
-            {
-              title: "Products",
-            },
-          ]}
-        />
-        <div className="flex justify-center w-full">
+        <div className="flex w-full flex-row">
           <BtnAdd route={"products"} text={"Add"}></BtnAdd>
           <Search
             placeholder="input search text"
             onSearch={onSearch}
             enterButton
-            style={{ margin: "0.5rem", width: "20rem" }}
+            style={{ marginLeft: "0.5rem", width: "20rem" }}
           />
         </div>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap sm:place-content-center md:place-content-start">
           {Array.isArray(product) ? (
             product.map((element) => (
               <CardProduct key={element.id} product={element}></CardProduct>
@@ -78,3 +59,4 @@ export default function TableProducts({ products }) {
     </>
   );
 }
+

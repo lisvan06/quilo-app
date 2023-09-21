@@ -1,5 +1,7 @@
 import CategoryService from "@/app/api/categories/service";
 import AddCategoryForm from "@/app/components/client/addCategoryForm";
+import { HomeOutlined } from "@ant-design/icons";
+import { Breadcrumb } from "antd";
 
 const EditCategory = async ({ params }) => {
   // const session = await getServerSession (authOptions);
@@ -21,11 +23,35 @@ const EditCategory = async ({ params }) => {
 
   return (
     <>
-      <div className="sm:py-4 bg-[url('/waves-background.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full h-[calc(100vh-128px)]">
+      <div className="sm:py-4 items-center p-3 w-full">
+      <Breadcrumb
+        items={[
+          {
+            href: "/",
+            title: <HomeOutlined />,
+          },
+          {
+            href: "/dashboard",
+            title: (
+              <>
+                <span>Dashboard</span>
+              </>
+            ),
+          },
+          {
+            href: "/dashboard/categories",
+            title: (
+              <>
+                <span>Categories</span>
+              </>
+            ),
+          },
+          {
+            title: "Edit",
+          },
+        ]}
+      />
         <div className="justify-center text-center">
-          <h1 className="text-4xl font-bold mb-2 text-white">
-            Edit Category
-          </h1>
         </div>
         <AddCategoryForm formValues={data} myAction={"edit"} id={params.id} />
       </div>

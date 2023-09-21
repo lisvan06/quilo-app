@@ -20,7 +20,7 @@ export default async function CategoriesPage() {
   try {
     return (
       <>
-        <div className="sm:py-4 items-center p-3 w-full h-[calc(100vh-128px)]">
+        <div className="sm:py-4 items-center p-3 w-full">
           <Breadcrumb
             items={[
               {

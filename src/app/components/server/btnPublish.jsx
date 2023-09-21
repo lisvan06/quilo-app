@@ -4,7 +4,7 @@ import { Switch } from 'antd';
 export default function BtnPublish({product, status}){
     const onChange = (checked) => {
         // Change products to published true
-        console.log(`switch to ${checked} with product ${product}`);
+        // console.log(`switch to ${checked} with product ${product}`);
         try {
             product.published = checked;
             const ps = new ProductService();

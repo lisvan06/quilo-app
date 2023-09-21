@@ -4,10 +4,13 @@ const AddProduct = async () => {
   let cat = [];
   try {
     const response = await fetch(
-      process.env.NEXT_PUBLIC_BASE_URL + "/api/categories"
+      process.env.NEXT_PUBLIC_BASE_URL + "/api/categories", {
+        method: "GET",
+      }
     );
     const data = await response.json();
     cat = data;
+    console.log("Categories: ", cat);
   } catch (error) {
     
   }
@@ -15,7 +18,7 @@ const AddProduct = async () => {
   try {
     return (
       <>
-        <div className="flex flex-col overflow-hidden sm:py-3 bg-[url('/waves-background1.svg')] bg-fixed bg-left-top bg-cover 2xl:h-[calc(100vh-4rem)] p-8 w-full sm:h-[calc(100vh-128px)]">
+        <div className="flex flex-col sm:py-3 p-8 w-full">
           <AddProductForm myAction="create" categories={cat} 
             formValues={{}}/>
         </div>

@@ -35,12 +35,23 @@ export default function TableCategories({ data }) {
   return (
     <>
       <div>
-        <BtnAdd route="categories" text="Add"></BtnAdd>
         <div className="flex justify-center items-center mt-2 md:w-80">
           <Table
+            bordered={true}
+            title={() => (
+              <div className="flex justify-between">
+                <span className="p-0 mt-1 inline-block align-middle">Categories List</span>
+                <BtnAdd
+                  route="categories"
+                  text="Add"
+                  className="float-right"
+                ></BtnAdd>
+              </div>
+            )}
+            footer={() => "Footer"}
             dataSource={data}
             columns={columns}
-            rowKey={obj => obj.id}
+            rowKey={(obj) => obj.id}
             style={{
               width: "95%",
               backgroundColor: "white",
@@ -48,8 +59,8 @@ export default function TableCategories({ data }) {
               padding: "10px",
               margin: "10px",
             }}
+            pagination={{ pageSize: 5 }}
           />
-         
         </div>
       </div>
     </>

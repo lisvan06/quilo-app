@@ -38,13 +38,25 @@ export default function RootLayout({
       <body className="m-0">
         <Providers>
           <ConfigProvider direction="ltr">
-            <Layout style={{ margin: 0, background: colorBgContainer }} >
-              <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
+            <Layout style={{ margin: 0, background: colorBgContainer }}>
+              <Sider
+                trigger={null}
+                collapsible
+                collapsed={collapsed}
+                collapsedWidth="0"
+                theme="light"
+              >
                 <div className="demo-logo-vertical" />
                 <MenuLeft />
               </Sider>
               <Layout>
-                <Header style={{ padding: 0, background: colorBgContainer, boxShadow: "10px 10px 5px lightblue" }}>
+                <Header
+                  style={{
+                    padding: 0,
+                    background: colorBgContainer,
+                    boxShadow: "10px 10px 5px lightblue",
+                  }}
+                >
                   <Button
                     type="text"
                     icon={

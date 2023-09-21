@@ -1,5 +1,6 @@
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/app/lib/prisma/_base";
+// import { prisma } from "@/app/lib/prisma/_base";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -22,6 +23,20 @@ export async function GET(req: NextRequest) {
 }
 
 async function searchByKey(key: string, value: string) {
+  const prisma = new PrismaClient().$extends({
+    result: {
+      user: {
+        fullName: {
+          needs: { firstName: true, lastName: true },
+          //sas
+          compute(user) {
+            return `${user.firstName} ${user.lastName}`
+          },
+        },
+      },
+    },
+  })
+
   const user = await prisma.user.findMany({
     where: {
       [key as string]: value,

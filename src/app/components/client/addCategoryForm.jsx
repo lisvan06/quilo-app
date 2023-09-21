@@ -85,33 +85,6 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
 
   return (
     <>
-      <Breadcrumb
-        items={[
-          {
-            href: "/",
-            title: <HomeOutlined />,
-          },
-          {
-            href: "/dashboard",
-            title: (
-              <>
-                <span>Dashboard</span>
-              </>
-            ),
-          },
-          {
-            href: "/dashboard/categories",
-            title: (
-              <>
-                <span>Categories</span>
-              </>
-            ),
-          },
-          {
-            title: "Add",
-          },
-        ]}
-      />
       <div className="mt-4 flex justify-center">
         <form
           onSubmit={handleSubmit}
