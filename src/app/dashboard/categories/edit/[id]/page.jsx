@@ -1,7 +1,5 @@
-import CategoryService from "@/app/api/category/service";
+import CategoryService from "@/app/api/categories/service";
 import AddCategoryForm from "@/app/components/client/addCategoryForm";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const EditCategory = async ({ params }) => {
   // const session = await getServerSession (authOptions);

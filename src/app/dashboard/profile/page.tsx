@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 
-import ProfileForm from "@/app/components/client/profileForm";
+import ProfileForm from "@/app/components/server/profileForm";
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
