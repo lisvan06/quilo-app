@@ -11,7 +11,7 @@ export default function AvatarUploadPage() {
     <>
       <h1>Upload Your Avatar</h1>
 
-      <form
+      {/* <form
         onSubmit={async (event) => {
           event.preventDefault();
 
@@ -32,7 +32,7 @@ export default function AvatarUploadPage() {
       >
         <input name="file" ref={inputFileRef} type="file" required />
         <button type="submit">Upload</button>
-      </form>
+      </form> */}
       {blob && (
         <div>
           Blob url: <a href={blob.url}>{blob.url}</a>
