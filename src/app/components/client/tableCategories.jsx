@@ -4,11 +4,10 @@ import { Table } from "antd";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import BtnDelete from "../client/btnDelete";
-import BtnEdit from "../client/btnEdit";
-import BtnAdd from "./btnAdd";
+import BtnEdit from "../server/btnEdit";
+import BtnAdd from "../server/btnAdd";
 
 export default function TableCategories({ data }) {
-  //console.log(typeof data);
   const { data: session, status } = useSession();
   const router = useRouter();
 

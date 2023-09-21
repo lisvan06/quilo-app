@@ -2,7 +2,7 @@
 
 import axios, { AxiosError } from "axios";
 import { signIn, useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button, Form, Input, message } from "antd";
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
@@ -13,15 +13,10 @@ export default function RegisterPage() {
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
 
-  // console.log("User.. ", session?.user);
-
   let auth = status === "unauthenticated" && !session ? false : true;
 
   const handleSubmit = async (fieldsValue: any) => {
     const values = await form.validateFields();
-
-    // console.log("Success:", values);
-
     const email = values.email as string;
     const password = values.password as string;
     const username = values.username as string;

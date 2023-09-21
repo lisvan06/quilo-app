@@ -1,28 +1,29 @@
-import CategoryService from "@/app/api/category/service";
 import AddProductForm from "../../../components/client/addProductForm";
 
 const AddProduct = async () => {
-  async function catValues() {
-    const catServ = new CategoryService();
-    const res = await catServ.getAllCategories();
-    const categories = res.data;
+  let cat = [];
+  try {
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + "/api/categories"
+    );
+    const data = await response.json();
+    cat = data;
+  } catch (error) {
     
-    return categories;
   }
 
   try {
-    const categories = await catValues();
     return (
       <>
         <div className="flex flex-col overflow-hidden sm:py-3 bg-[url('/waves-background1.svg')] bg-fixed bg-left-top bg-cover 2xl:h-[calc(100vh-4rem)] p-8 w-full sm:h-[calc(100vh-128px)]">
-        
-          <AddProductForm categories={categories} myAction="create"/>
+          <AddProductForm myAction="create" categories={cat} 
+            formValues={{}}/>
         </div>
       </>
     );
   } catch (error) {
-    
-  }  
+    return <><h1>Error</h1></>
+  }
 };
 
 export default AddProduct;

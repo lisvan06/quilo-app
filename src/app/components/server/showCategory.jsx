@@ -10,14 +10,6 @@ const ShowCategory = ({ categories }) => {
       <>
         {data.map((element) => (
           <tr key={element.id}>
-            {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <div className="flex items-center">
-                <div className="flex-shrink-0 w-10 h-10">
-                  
-                  <h1 className="text-gray-900 whitespace-no-wrap">{user.username}</h1>
-                </div>
-              </div>
-            </td> */}
             <td className="px-5 py-2 border-b border-gray-200 bg-white text-sm">
               <p className="text-gray-900 whitespace-no-wrap">{element.name}</p>
             </td>

@@ -43,8 +43,13 @@ export async function GET(req: NextRequest) {
           where: {
             ownerId: ownerId,
             deleted: false,
+          },
+          include: {
+            category: true,
+            image: true
           }
-        }
+        },
+        
       }
     });
 

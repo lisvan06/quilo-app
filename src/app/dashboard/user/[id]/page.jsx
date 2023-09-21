@@ -1,4 +1,4 @@
-import UserService from "@/app/api/user/service";
+import UserService from "@/app/api/users/service";
 
 const shoProductPage = async ({ params }) => {
   const id = params.id;

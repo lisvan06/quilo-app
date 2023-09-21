@@ -100,11 +100,11 @@ enum Role {
 }
 
 model Image {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  publicId String    @unique
-  format   String
-  version  String
-  Product  Product[]
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  url                String    @unique
+  contentDisposition String?
+  pathname           String
+  Product            Product[]
 
   @@map("images")
 }

@@ -1,7 +1,7 @@
 import TableCategories from "@/app/components/client/tableCategories";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import CategoryService from "@/app/api/category/service";
+import CategoryService from "@/app/api/categories/service";
 import { Breadcrumb } from "antd";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 

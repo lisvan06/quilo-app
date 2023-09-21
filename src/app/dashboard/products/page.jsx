@@ -1,7 +1,7 @@
 import TableProducts from "@/app/components/client/tableProducts";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import ProductService from "@/app/api/product/service";
+import ProductService from "@/app/api/products/service";
 
 export default async function productsPage() {
   async function getData(user) {
@@ -23,12 +23,11 @@ export default async function productsPage() {
   const session = await getServerSession(authOptions);
 
   try {
-    // console.log(session.user);
     const data = await getData(session.user);
-    // console.log("Products... ", data);
+    
     return (
       <>
-        <div className="sm:py-4 bg-[url('/waves-background1.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full h-[calc(100vh-128px)]">
+        <div className="sm:py-4 items-center p-3 w-full h-full">
           <TableProducts products={data}></TableProducts>
         </div>
       </>

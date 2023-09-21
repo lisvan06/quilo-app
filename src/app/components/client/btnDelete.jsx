@@ -1,8 +1,5 @@
-//Sweet Alert 2
 "use client";
 
-// import Swal from "sweetalert2";
-// import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/navigation";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
@@ -19,11 +16,10 @@ const BtnDelete = ({ id, name }) => {
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
     setOpen(false);
   };
 
-  const handleOk = async () => {    
+  const handleOk = async () => {
     setConfirmLoading(true);
     const response = await fetch(`/api/${name}/${id}`, {
       method: "DELETE",
@@ -31,24 +27,19 @@ const BtnDelete = ({ id, name }) => {
     if (response.ok === false) {
       setModalText(`Your ${name} has not been deleted.`);
       setConfirmLoading(false);
-    } else {      
+    } else {
       setModalText(`Your ${name} has been deleted.`);
-      setTimeout(() => {        
+      setTimeout(() => {
         router.refresh();
       }, 1000);
     }
-
-    // setTimeout(() => {
-    //   setOpen(false);
-    //   setConfirmLoading(false);
-    // }, 2000);
   };
 
   return (
     <>
       <DeleteOutlined
         onClick={showModal}
-        style={{color: "red", fontSize: '20px', marginLeft: "8px"}}
+        style={{ color: "red", fontSize: "20px", marginLeft: "8px" }}
       ></DeleteOutlined>
       <Modal
         title="The element will be deleted"

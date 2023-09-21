@@ -67,14 +67,14 @@ export default function RootLayout({
                 >
                   {children}
                 </Content>
-                <Footer
+                {/* <Footer
                   style={{
                     textAlign: "center",
                     width: "100%",
                   }}
                 >
                   Al Quilo ©2023 By Lisvan
-                </Footer>
+                </Footer> */}
               </Layout>
             </Layout>
           </ConfigProvider>

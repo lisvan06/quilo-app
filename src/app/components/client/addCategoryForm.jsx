@@ -24,9 +24,6 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
   };
 
   const onSubmitCreate = async (formData) => {
-    // console.log("Creating...");
-    // formData.ownerId = session?.user.id;
-    // console.log("Datos capturados del Form: ", formData);
     const { name } = formData;
 
     if (!formData) {
@@ -35,7 +32,7 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
     }
 
     try {
-      const res = await fetch("/api/category", {
+      const res = await fetch("/api/categories", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -46,7 +43,6 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
       });
 
       const response = await res.json();
-      // console.log("Response ", response);
       if (response) {
         router.refresh();
         router.push("/dashboard/categories");
@@ -61,7 +57,7 @@ const AddCategoryForm = ({ formValues, myAction, id }) => {
   const onSubmitEdit = async (formData) => {
     console.log("Editing...");
     try {
-      const response = await fetch(`/api/category/${id}`, {
+      const response = await fetch(`/api/categories/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

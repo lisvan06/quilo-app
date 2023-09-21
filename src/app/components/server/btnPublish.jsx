@@ -1,4 +1,4 @@
-import ProductService from '@/app/api/product/service';
+import ProductService from '@/app/api/products/service';
 import { Switch } from 'antd';
 
 export default function BtnPublish({product, status}){
@@ -9,9 +9,6 @@ export default function BtnPublish({product, status}){
             product.published = checked;
             const ps = new ProductService();
             const res = ps.setPublised(product);
-
-            console.log("Published Status Changed");
-            
         } catch (error) {
             
         }

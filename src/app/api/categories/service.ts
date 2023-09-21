@@ -3,8 +3,8 @@ import axios, { AxiosError } from "axios";
 export default class CategoryService {
   async getAllCategories<PrismaClient>() {
     try {
-      const data = await axios.get(
-        process.env.NEXTAUTH_URL + "/api/category"
+      const {data} = await axios.get(
+        process.env.NEXTAUTH_URL + "/api/categories"
       );
       return data;
     } catch (error) {
@@ -15,7 +15,7 @@ export default class CategoryService {
   async getCategoryById<PrismaClient>(id: string){
     try {
       const data = await axios.get(
-        process.env.NEXTAUTH_URL + "/api/category/" + id
+        process.env.NEXTAUTH_URL + "/api/categories/" + id
       );
       return data;
     } catch (error) {

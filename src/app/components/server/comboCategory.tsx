@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, useState } from "react";
 import { Select, Space } from "antd";
 
 export type Categories = {
@@ -6,38 +6,28 @@ export type Categories = {
   name: string;
 };
 
-export type SelectProps = {
-  label: String;
-  name: String;
-  categories: Categories[];
-  defaultValue: string;
-  childToParent: Function;
-  value: "name";
-  onChange: (e: any) => string;
-  options: { id: String; name: string }[];
-};
+export const ComboCategory = ({ categories, childToParent, actualValue }: any) => {
+  const id = useId();
+  const [value, setValue] = useState(actualValue);
 
-function childToParent(e: any) {
-  return e;
-  console.log(e);
-}
-
-export const ComboCategory = ({ label, categories, childToParent }: any) => {
-  const handleChange = (value: { value: string; label: React.ReactNode }) => {
-    childToParent(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
+  const onChange = (value: { value: string; label: React.ReactNode }) => {
+    setValue(value);
+    childToParent(value);
   };
 
   const cat = categories;
 
-  const id = useId();
   return (
     <>
-      <label htmlFor="{id}">{label}</label>
       <Select
         id="comboProdCat"
         key="categoryId"
-        //defaultValue={"Select a category"}
-        onChange={handleChange}
+        value={value}
+        // showSearch
+        placeholder="Select a category"
+        // optionFilterProp="children"
+        onChange={onChange}
+        // onSearch={onSearch}
         options={cat.map((item: any) => ({
           value: item.id,
           label: item.name,

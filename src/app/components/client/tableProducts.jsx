@@ -3,8 +3,8 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-import BtnAdd from "@/app/components/client/btnAdd";
-import CardProduct from "./cardProduct";
+import BtnAdd from "@/app/components/server/btnAdd";
+import CardProduct from "../server/cardProduct";
 import Search from "antd/es/input/Search";
 import { Breadcrumb, Pagination } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
@@ -14,7 +14,6 @@ export default function TableProducts({ products }) {
   const router = useRouter();
 
   const product = products.products;
-  // console.log("Products", products);
 
   const handleClickAdd = function () {
     router.push("/dashboard/products/add");
@@ -50,7 +49,7 @@ export default function TableProducts({ products }) {
             },
           ]}
         />
-        <div className=" flex justify-center w-full">
+        <div className="flex justify-center w-full">
           <BtnAdd route={"products"} text={"Add"}></BtnAdd>
           <Search
             placeholder="input search text"
@@ -59,7 +58,7 @@ export default function TableProducts({ products }) {
             style={{ margin: "0.5rem", width: "20rem" }}
           />
         </div>
-        <div className="flex flex-col w-full justify-center items-center sm:flex-row sm:flex-wrap">
+        <div className="flex flex-wrap">
           {Array.isArray(product) ? (
             product.map((element) => (
               <CardProduct key={element.id} product={element}></CardProduct>

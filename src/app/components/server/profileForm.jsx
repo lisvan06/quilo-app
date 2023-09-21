@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import UserService from "@/app/api/user/service";
+import UserService from "@/app/api/users/service";
 import { Button, Form, Input, message } from "antd";
 
 export default function ProfileForm() {
@@ -13,9 +13,6 @@ export default function ProfileForm() {
 
   useEffect(() => {
     if (session?.user) {
-      // console.log(formValues);
-      // setAddress(session?.user?.address);
-      // setEnterprise(session?.user?.enterprise);
       form.setFieldsValue({
         enterprise: session?.user?.enterprise,
         address: session?.user?.address,
@@ -47,11 +44,6 @@ export default function ProfileForm() {
         const editedUser = await newU.updateUser(values, values.ownerId);
 
         if (editedUser) {
-          // messageApi.open({
-          //   type: "success",
-          //   content: "Data saved",
-          // });
-
           updateSession(editedUser.data.data);
         } else {
           messageApi.open({

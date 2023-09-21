@@ -11,6 +11,10 @@ export async function GET(
         id: params.id as string,
         deleted: false
       },
+      include: {
+        category: true,
+        image: true
+      }
     });
     return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
@@ -23,7 +27,6 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const requestBody = await req.json();
-  console.log(requestBody);
   try {
     const price = parseFloat(requestBody.price);
     requestBody.price = price;
@@ -41,6 +44,8 @@ export async function PUT(
         stock: requestBody.stock,
         price: requestBody.price,
         published: requestBody.published,
+        imageId: requestBody.imageId,
+        categoryId: requestBody.categoryId,
       },
     });
     return NextResponse.json({ data: data }, { status: 200 });

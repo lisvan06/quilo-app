@@ -4,12 +4,8 @@ import axios, { AxiosError } from "axios";
 
 export default class ProductService {
   async setPublised(product: any) {
-
     try {
-      const res = await axios.put(
-        `/api/product/${product.id}`,
-        product
-      );
+      const res = await axios.put(`/api/products/${product.id}`, product);
       return res;
     } catch (error) {
       return false;
@@ -19,7 +15,7 @@ export default class ProductService {
   async getAllProducts<PrismaClient>() {
     try {
       const products = await axios.get(
-        process.env.NEXTAUTH_URL + "/api/product"
+        process.env.NEXTAUTH_URL + "/api/products"
       );
       return products;
     } catch (error) {
@@ -30,7 +26,7 @@ export default class ProductService {
   async getProductById<PrismaClient>(id: string) {
     try {
       const products = await axios.get(
-        process.env.NEXTAUTH_URL + "/api/product/" + id
+        process.env.NEXTAUTH_URL + "/api/products/" + id
       );
       return products;
     } catch (error) {
@@ -42,7 +38,7 @@ export default class ProductService {
     // console.log("EHere in Product Service", "/api/product/search?ownerId=" + id);
     try {
       const products = await axios.get(
-        process.env.NEXTAUTH_URL + "/api/product/search?ownerId=" + id
+        process.env.NEXTAUTH_URL + "/api/products/search?ownerId=" + id
       );
       return products;
     } catch (error) {
