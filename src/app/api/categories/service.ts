@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 export default class CategoryService {
+  
   async getAllCategories<PrismaClient>() {
     try {
       const {data} = await axios.get(
@@ -8,7 +9,7 @@ export default class CategoryService {
       );
       return data;
     } catch (error) {
-      return false;
+      return [];
     }
   }
 
@@ -19,7 +20,7 @@ export default class CategoryService {
       );
       return data;
     } catch (error) {
-      return false;
+      return [];
     }
   }
 }

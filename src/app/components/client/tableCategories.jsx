@@ -40,6 +40,7 @@ export default function TableCategories({ data }) {
           <Table
             dataSource={data}
             columns={columns}
+            rowKey={obj => obj.id}
             style={{
               width: "95%",
               backgroundColor: "white",
@@ -48,7 +49,7 @@ export default function TableCategories({ data }) {
               margin: "10px",
             }}
           />
-          ;
+         
         </div>
       </div>
     </>

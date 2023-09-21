@@ -6,23 +6,21 @@ import { Breadcrumb } from "antd";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 
 export default async function CategoriesPage() {
-  async function getData() {
+  let categories = [];
+  try {
     const catServ = new CategoryService();
     const result = await catServ.getAllCategories();
-    if (result) {
-      const categories = result.data;
-      return categories;
-    }
+    categories = result;
+  } catch (error) {
+    return [];
   }
 
   const session = await getServerSession(authOptions);
 
   try {
-    const data = await getData();
-
     return (
       <>
-        <div className="sm:py-4 bg-[url('/waves-background1.svg')] bg-fixed bg-left-top bg-cover items-center p-3 w-full h-[calc(100vh-128px)]">
+        <div className="sm:py-4 items-center p-3 w-full h-[calc(100vh-128px)]">
           <Breadcrumb
             items={[
               {
@@ -43,7 +41,7 @@ export default async function CategoriesPage() {
             ]}
           />
           <div className="flex justify-center w-full">
-            <TableCategories data={data}></TableCategories>
+            <TableCategories data={categories}></TableCategories>
           </div>
         </div>
       </>
