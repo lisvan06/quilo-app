@@ -9,10 +9,6 @@ export default function CardProduct(product: any) {
   return (
     <>
       <Card
-        onClick={() => {
-          const url = "/dashboard/products/details/" + item.id;
-          window.location.href = url;
-        }}
         hoverable
         style={{
           width: "8rem",
@@ -20,14 +16,26 @@ export default function CardProduct(product: any) {
           boxShadow:
             "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19)",
         }}
-        cover={<div style={{  height: "128px", clear: "both" }}><img style={{ width: "100%" }} alt="example" src={item.image.url}/></div>}
+        cover={
+          <div style={{ height: "128px", clear: "both" }}>
+            <img
+              style={{ width: "100%" }}
+              alt="example"
+              src={item.image.url}
+              onClick={() => {
+                const url = "/dashboard/products/details/" + item.id;
+                window.location.href = url;
+              }}
+            />
+          </div>
+        }
         actions={[
           <BtnPublish product={item} status="checked"></BtnPublish>,
           <BtnEdit id={item.id} route={`products`}></BtnEdit>,
           <BtnDelete id={item.id} name={"product"}></BtnDelete>,
         ]}
       >
-        <Meta title={item.title} description={`$ ${item.price}`}/>
+        <Meta title={item.title} description={`$ ${item.price}`} />
         {/* { <div className="mt-0.5 text-gray-400 text-sm p-0">
           <p className="text-justify">{item.title.substring(0, 30)}...</p>
         </div>} */}

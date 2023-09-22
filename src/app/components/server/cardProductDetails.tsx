@@ -1,7 +1,6 @@
 "use client";
 import { HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb, Button, Card } from "antd";
-import Meta from "antd/es/card/Meta";
 
 export default function CardProductDetails(product: any) {
   const item = product.product;
@@ -67,21 +66,7 @@ export default function CardProductDetails(product: any) {
               <div className="text-yellow-500">★ ★ ★ ★ ☆</div>
             </div>
             <p className="text-sm text-gray-600 text-justify mb-4">
-              Description: Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Id iste quas aliquid harum dignissimos. Quam eligendi vero
-              iure ipsum unde architecto similique consequatur nobis, adipisci
-              odio expedita vitae, ex quasi dicta excepturi nostrum dolorum.
-              Quia temporibus dolor obcaecati eius, unde dignissimos earum esse
-              at ut doloremque molestiae porro praesentium delectus fugiat sunt
-              quos consequatur voluptates numquam excepturi expedita. Quidem
-              odio quibusdam nam fugiat modi culpa, nulla in a amet mollitia,
-              eum obcaecati atque molestias qui dolorum ratione molestiae
-              aperiam laudantium? Nobis eveniet ab sequi libero aliquid cumque.
-              Sit, necessitatibus fugit? Deleniti sed molestias voluptates,
-              dolorum facilis voluptate quisquam alias, quia perferendis autem
-              distinctio praesentium non temporibus ex reiciendis,
-              necessitatibus blanditiis nihil ea. Maxime, velit ipsa vel autem
-              animi vero perspiciatis.
+              {item.description}
             </p>
             <Button type="primary">Contact Seller</Button>
           </div>
