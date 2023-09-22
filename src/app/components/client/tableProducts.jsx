@@ -39,7 +39,7 @@ export default function TableProducts({ products }) {
             style={{ marginLeft: "0.5rem", width: "20rem" }}
           />
         </div>
-        <div className="flex flex-wrap sm:place-content-center md:place-content-start">
+        <div className="flex flex-wrap justify-center w-full sm:justify-center sm:place-content-center md:place-content-start">
           {Array.isArray(product) ? (
             product.map((element) => (
               <CardProduct key={element.id} product={element}></CardProduct>

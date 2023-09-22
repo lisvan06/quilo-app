@@ -3,13 +3,12 @@
 import "./globals.css";
 import React, { useState } from "react";
 import { Inter } from "next/font/google";
-import Providers from "./providers";
-
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-
-import { Layout, Button, theme, Space, Avatar, ConfigProvider } from "antd";
+import Providers from "./components/providers";
 import MenuUser from "./components/menu_user";
 import MenuLeft from "./components/menu_left";
+
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { Layout, Button, theme, ConfigProvider } from "antd";
 import { Footer } from "antd/es/layout/layout";
 
 const { Header, Sider, Content } = Layout;

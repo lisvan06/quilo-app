@@ -3,6 +3,7 @@ import { Avatar, Dropdown, MenuProps, Space } from "antd";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default function MenuUser() {
   const { data: session, status } = useSession();
@@ -12,7 +13,7 @@ export default function MenuUser() {
 
   const items: MenuProps["items"] = [
     {
-      label: <p>Welcome, {session?.user?.username}</p>,
+      label: <p>Welcome, {session?.user?.email.split('@')[0]}</p>,
       key: "0",
     },
     {
@@ -61,7 +62,7 @@ export default function MenuUser() {
             <a onClick={(e) => e.preventDefault()} style={{marginBottom: "1rem"}}>
               <Space>
                 <Avatar
-                src="/images.png"
+                src={(session?.user.image) ? session.user.image : "/avatar.png"}
                   size={48}
                   style={{  marginTop: '-5px'}}
                   icon={<UserOutlined />}

@@ -15,7 +15,7 @@ export default function CardProduct(product: any) {
         }}
         hoverable
         style={{
-          width: "9rem",
+          width: "8rem",
           margin: "0.8rem",
           boxShadow:
             "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19)",

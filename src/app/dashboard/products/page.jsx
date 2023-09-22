@@ -4,7 +4,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ProductService from "@/app/api/products/service";
 import { HomeOutlined } from "@ant-design/icons";
 import { Breadcrumb } from "antd";
-import BtnAdd from "@/app/components/server/btnAdd";
 
 export default async function productsPage() {
   async function getData(user) {
