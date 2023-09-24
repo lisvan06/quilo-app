@@ -3,13 +3,14 @@
 import "./globals.css";
 import React, { useState } from "react";
 import { Inter } from "next/font/google";
+
+import StyledComponentsRegistry from "./lib/AntdRegistry";
 import Providers from "./components/providers";
 import MenuUser from "./components/menu_user";
 import MenuLeft from "./components/menu_left";
 
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Button, theme, ConfigProvider } from "antd";
-import { Footer } from "antd/es/layout/layout";
 
 const { Header, Sider, Content } = Layout;
 
@@ -37,48 +38,53 @@ export default function RootLayout({
       <body className="m-0">
         <Providers>
           <ConfigProvider direction="ltr">
-            <Layout style={{ margin: 0, background: colorBgContainer }}>
-              <Sider
-                trigger={null}
-                collapsible
-                collapsed={collapsed}
-                collapsedWidth="0"
-                theme="light"
-              >
-                <div className="demo-logo-vertical" />
-                <MenuLeft />
-              </Sider>
-              <Layout>
-                <Header
-                  style={{
-                    padding: 0,
-                    background: colorBgContainer,
-                    boxShadow: "10px 10px 5px lightblue",
-                  }}
+            <StyledComponentsRegistry>
+              <Layout style={{ margin: 0, background: colorBgContainer }}>
+                <Sider
+                  trigger={null}
+                  collapsible
+                  collapsed={collapsed}
+                  collapsedWidth="0"
+                  theme="light"
                 >
-                  <Button
-                    type="text"
-                    icon={
-                      collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />
-                    }
-                    onClick={() => setCollapsed(!collapsed)}
+                  <div className="demo-logo-vertical" />
+                  <MenuLeft />
+                </Sider>
+                <Layout>
+                  <Header
                     style={{
-                      fontSize: "16px",
-                      width: 64,
-                      height: 64,
+                      padding: 0,
+                      background: colorBgContainer,
+                      boxShadow: "10px 10px 5px lightblue",
                     }}
-                  />
-                  <MenuUser />
-                </Header>
-                <Content
-                  style={{
-                    margin: "0px",
-                    background: colorBgContainer,
-                  }}
-                >
-                  {children}
-                </Content>
-                {/* <Footer
+                  >
+                    <Button
+                      type="text"
+                      icon={
+                        collapsed ? (
+                          <MenuUnfoldOutlined />
+                        ) : (
+                          <MenuFoldOutlined />
+                        )
+                      }
+                      onClick={() => setCollapsed(!collapsed)}
+                      style={{
+                        fontSize: "16px",
+                        width: 64,
+                        height: 64,
+                      }}
+                    />
+                    <MenuUser />
+                  </Header>
+                  <Content
+                    style={{
+                      margin: "0px",
+                      background: colorBgContainer,
+                    }}
+                  >
+                    {children}
+                  </Content>
+                  {/* <Footer
                   style={{
                     textAlign: "center",
                     width: "100%",
@@ -86,8 +92,9 @@ export default function RootLayout({
                 >
                   Al Quilo ©2023 By Lisvan
                 </Footer> */}
+                </Layout>
               </Layout>
-            </Layout>
+            </StyledComponentsRegistry>
           </ConfigProvider>
         </Providers>
       </body>

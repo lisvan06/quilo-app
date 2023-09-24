@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 import { prisma } from "@/app/lib/prisma/_base";
 import bcrypt from "bcryptjs";
+import axios from "axios";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -75,18 +76,19 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.user = user;
       }
-      if (trigger === "signUp") {
-        // console.log("Is new user ");
-        // console.log(token);
-      } else {
-        // console.log("Is not new user ");
-        // console.log(token);
-        //find the user by email on db and if not exist create new user
-        //add id to the token
-      }
+      // if (trigger === "signUp") {
+      //   console.log("Is new user ");
+      //   console.log(token);
+      // } else {
+      //   console.log("Is not new user ");
+      //   console.log(token);
+      // }
       return { ...token, ...user };
     },
-
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   console.log(user);
+    //   return true;
+    // },
     session({ session, token, user, trigger }) {
       session.user = token.user as any;
       return session;
@@ -98,8 +100,8 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
-  }
-}
+  },
+};
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

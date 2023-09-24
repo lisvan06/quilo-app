@@ -1,6 +1,6 @@
 "use client";
 import { HomeOutlined } from "@ant-design/icons";
-import { Breadcrumb, Button, Card } from "antd";
+import { Breadcrumb, Button, Card, Rate } from "antd";
 
 export default function CardProductDetails(product: any) {
   const item = product.product;
@@ -63,7 +63,11 @@ export default function CardProductDetails(product: any) {
               Stock Quantity: {item.stock}
             </p>
             <div className="flex items-center mb-2">
-              <div className="text-yellow-500">★ ★ ★ ★ ☆</div>
+              <div className="text-yellow-500">
+              
+            <Rate allowHalf defaultValue={4.5}/>
+          {/* ★ ★ ★ ★ ☆ */}
+          </div>
             </div>
             <p className="text-sm text-gray-600 text-justify mb-4">
               {item.description}

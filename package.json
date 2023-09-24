@@ -10,7 +10,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.16.2",
+    "@ant-design/cssinjs": "^1.17.0",
     "@ant-design/icons": "^5.2.5",
     "@heroicons/react": "^2.0.18",
     "@nestjs/axios": "^3.0.0",

@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Breadcrumb, Button, Checkbox, Form, Input } from "antd";
-import { HomeOutlined } from "@ant-design/icons";
+import { Button, Input } from "antd";
 
 const AddCategoryForm = ({ formValues, myAction, id }) => {
   const { data: session, status } = useSession();
