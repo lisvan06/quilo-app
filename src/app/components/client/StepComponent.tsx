@@ -49,6 +49,7 @@ const StepComponent = () => {
   };
 
   const clickDone = () => {
+    console.log("All Data: ", form1, form2, form3);
     message.success("Processing complete!");
   };
 
@@ -137,7 +138,7 @@ const StepComponent = () => {
               Done
             </Button>
           )}
-          {current > 0 && current < 3 && (
+          {current > 0 && (
             <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
               Previous
             </Button>
